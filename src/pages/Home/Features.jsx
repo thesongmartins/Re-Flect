@@ -4,7 +4,7 @@ const Features = () => {
   // console.log(features);
   return (
     <>
-      <div>Features</div>
+      <div className="bg-green-600 text-center">Features</div>
       {features.map((feature) => (
         <div key={feature.id}>
           <h5>{feature.title}</h5>
