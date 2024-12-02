@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:css": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
   "dependencies": {
     "postcss": "^8.4.49",
