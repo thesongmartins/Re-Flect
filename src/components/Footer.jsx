@@ -1,4 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaFacebook } from "react-icons/fa";
+import { CiLinkedin } from "react-icons/ci";
+import { FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -26,11 +29,11 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <FontAwesomeIcon icon="fa-brands fa-x-twitter" />
-            <FontAwesomeIcon icon="fa-brands fa-instagram" />
-            <FontAwesomeIcon icon="fa-brands fa-linkedin" />
-            <FontAwesomeIcon icon="fa-brands fa-facebook" />
+          <div className="flex gap-5">
+            <FaXTwitter />
+            <FaInstagram />
+            <CiLinkedin />
+            <FaFacebook />
           </div>
         </div>
 
