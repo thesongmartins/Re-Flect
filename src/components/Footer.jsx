@@ -8,9 +8,9 @@ const Footer = () => {
     <>
       <footer className="p-10 bg-gray-200">
         <div className="flex justify-between ">
-          <p className="text-bold text-xl">Re-Flect</p>
+          <p className="font-bold text-xl">Re-Flect</p>
           <div>
-            <ul className="flex gap-10">
+            <ul className="flex gap-10 cursor-pointer">
               <li>
                 <a href="#">Home</a>
               </li>
@@ -29,7 +29,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="flex gap-5">
+          <div className="flex gap-5 cursor-pointer">
             <FaXTwitter />
             <FaInstagram />
             <CiLinkedin />
