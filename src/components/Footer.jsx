@@ -6,7 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
     <>
-      <footer className="p-10 bg-gray-200">
+      <footer className="p-10 bg-gray-100">
         <div className="flex justify-between ">
           <p className="font-bold text-xl">Re-Flect</p>
           <div>
@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex justify-between mt-10">
+        <div className="flex justify-between mt-10 text-gray-400">
           <p>&copy; Re-Flect 2024, All rights reserved.</p>
           <div className="flex gap-10">
             <a href="#">Privacy Policy</a>
