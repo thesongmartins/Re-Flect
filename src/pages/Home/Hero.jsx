@@ -11,7 +11,7 @@ const Hero = () => {
           </p>
         </div>
         <div>
-          <img src="" alt="" />
+          <img src="eating" alt="" />
         </div>
       </section>
       <Button text="Sign Up for Free" href="/register" color="Green " />

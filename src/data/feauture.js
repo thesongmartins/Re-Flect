@@ -1,4 +1,5 @@
-import eating from "../assets/eating.jpg";
+import eating from "../assets/eating.svg";
+
 export const features = [{
     id: 1,
     title: "Voice Journaling",

@@ -4,14 +4,15 @@ const Features = () => {
   // console.log(features);
   return (
     <>
-      <div className="bg-green-600 text-center">Features</div>
-      {features.map((feature) => (
-        <div key={feature.id}>
-          <h5>{feature.title}</h5>
-          <p>{feature.description}</p>
-          <img src={feature.img} alt={feature.title} />
-        </div>
-      ))}
+      <div className="flex ">
+        {features.map((feature) => (
+          <div key={feature.id}>
+            <h5>{feature.title}</h5>
+            <p>{feature.description}</p>
+            <img src={feature.img} alt={feature.title} />
+          </div>
+        ))}
+      </div>
     </>
   );
 };
