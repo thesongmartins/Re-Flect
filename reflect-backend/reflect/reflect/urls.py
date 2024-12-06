@@ -15,10 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.http import JsonResponse
 from django.contrib import admin
 from django.urls import path, include
 
+def root_view(request):
+    return JsonResponse({"message": "Welcome to the Re-Flect API!"})
+
 urlpatterns = [
+    path("", root_view, name="root"),  # Root route
     path("admin/", admin.site.urls),
-    path(" ", include('users.urls'))
+    path("api/users/", include("users.urls")),
+    path("api/journal/", include("journal.urls")),
 ]
