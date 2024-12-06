@@ -1,30 +1,30 @@
-import eating from "../assets/eating.svg";
+import heroImg from "../assets/hero-img.svg";
 
 export const features = [{
     id: 1,
     title: "Voice Journaling",
     description: "Share your heart without lifting a finger",
-    img: eating
+    img: heroImg
 
 },
 {
     id: 2,
     title: "Media Upload",
     description: "Paint a vivid picture of your experience",
-    img: eating
+    img: heroImg
 
 },
 {
     id: 3,
     title: "Mood Tracker",
     description: "Understand your emotional pattern and find balance",
-    img: eating
+    img: heroImg
 
 },
 {
     id: 4,
     title: "Timeline View",
     description: "Witness your growth and transformation",
-    img: eating
+    img: heroImg
 
 }]
