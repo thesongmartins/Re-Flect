@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <>
       <section className="bg-hero p-10 mt-5 flex gap-20">
-        <div>
+        <div className="">
           <h2>Discover Yourself, One Entry at a Time</h2>
           <p>
             Re-flect empowers you to reflect on your day and gain valuable

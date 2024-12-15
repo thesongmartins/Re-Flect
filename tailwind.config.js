@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        rubik: ["Rubik", "san-serif"]
+        ubuntu: ["Ubuntu", "san-serif"]
       },
       colors: {
         hero: "#F7F9F5"
