@@ -11,22 +11,23 @@ const Login = () => {
                 type="text"
                 placeholder="Sign Up"
                 className="rounded bg-gray-200 p-2"
+                required
               />
             </div>
             <div className="flex flex-col">
               <label htmlFor="Login">Password</label>
               <input
                 type="password"
-                placeholder="Sign Up"
                 className="rounded bg-gray-200 p-2"
+                required
               />
             </div>
             <div className="flex flex-col mb-5">
               <label htmlFor="Login">Confirm Password</label>
               <input
-                type="text"
-                placeholder="Sign Up"
+                type="password"
                 className="rounded bg-gray-200 p-2"
+                required
               />
             </div>
             <div className="flex items-center justify-center">
@@ -34,7 +35,12 @@ const Login = () => {
                 Sign Up
               </button>
             </div>
-            <p className="text-center ">Or</p>
+            <p className="text-center">Or</p>
+
+            <a className="border p-2 flex items-center justify-center" href="#">
+              Sign Up with Google
+            </a>
+            <p>By clicking sign up, you agree to our terms and conditions</p>
           </div>
         </div>
       </form>
