@@ -38,23 +38,25 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
-    
+
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
-            user = authenticate(
-                username=serializer.validated_data['username'],
-                password=serializer.validated_data['password']
-            )
-            if user:
-                tokens = get_tokens_for_user(user)
-                return Response(tokens, status=status.HTTP_200_OK)
+            user = serializer.context['user']  # Retrieve the user from context
+            tokens = get_tokens_for_user(user)
             return Response(
-                {"error": "Invalid credentials or inactive account"},
-                status=status.HTTP_401_UNAUTHORIZED,
+                {
+                    "refresh": tokens['refresh'],
+                    "access": tokens['access'],
+                    "user": {
+                        "id": user.id,
+                        "username": user.username,
+                        "email": user.email,
+                    },
+                },
+                status=status.HTTP_200_OK,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
     
