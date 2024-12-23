@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    "users.middleware.DebugMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -62,6 +63,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "reflect.urls"
 
 CORS_ALLOW_ALL_ORIGINS = True  # For development only
+CSRF_TRUSTED_ORIGINS = ['https://potential-space-goggles-6jwrpxjw9xjcrpvv-8000.app.github.dev']
 
 TEMPLATES = [
     {

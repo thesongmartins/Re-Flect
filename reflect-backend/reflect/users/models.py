@@ -9,6 +9,7 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
+        extra_fields.setdefault('is_active', True)  # Default active status
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -19,10 +20,11 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)  # Ensure superuser is active
 
-        if 'phone_number' not in extra_fields:
-            extra_fields['phone_number'] = uuid.uuid4().hex  # Use a unique placeholder value
+        if 'username' not in extra_fields:
+            extra_fields['username'] = 'admin'  # Use a default username for superuser if not provided
 
         return self.create_user(email, password, **extra_fields)
+
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -33,11 +35,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=now, null=False)
     last_login = models.DateTimeField(blank=True, null=True)
     is_premium = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)  # Required by Django
+    is_staff = models.BooleanField(default=False)  # Required by Django
+    is_superuser = models.BooleanField(default=False)  # Required by Django
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    #REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']  # 'username' is required when creating a superuser
 
     def __str__(self):
         return self.username

@@ -17,8 +17,16 @@ def get_tokens_for_user(user):
 class RegisterView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = []
+
+     
+    def get(self, request):
+        # Add GET method for testing
+        return Response({"message": "Register endpoint accessible"}, status=status.HTTP_200_OK)
     
     def post(self, request):
+        print("\n=== Register View ===")
+        print(f"Request data: {request.data}")
+
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
