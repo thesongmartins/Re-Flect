@@ -25,7 +25,11 @@ SECRET_KEY = "django-insecure-&bfn8_&$93$&!4rt+enm&4niahhr9q&49os*zwif2t#5t-b99g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'potential-space-goggles-6jwrpxjw9xjcrpvv-8000.app.github.dev',
+    '127.0.0.1',
+    'localhost'
+]
 
 
 # Application definition
@@ -41,9 +45,11 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "users",
     "journal",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -54,6 +60,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "reflect.urls"
+
+CORS_ALLOW_ALL_ORIGINS = True  # For development only
 
 TEMPLATES = [
     {
@@ -76,6 +84,9 @@ WSGI_APPLICATION = "reflect.wsgi.application"
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+       'rest_framework.permissions.AllowAny',
     ],
 }
 

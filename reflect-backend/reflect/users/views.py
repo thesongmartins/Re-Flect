@@ -16,7 +16,8 @@ def get_tokens_for_user(user):
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]
-
+    authentication_classes = []
+    
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
@@ -26,7 +27,7 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
-
+    
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -37,7 +38,7 @@ class LoginView(APIView):
 
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
-
+    
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
