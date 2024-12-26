@@ -1,5 +1,6 @@
 import Button from "../../components/Button";
 import heroImg from "../../assets/hero-img.svg";
+import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <>
@@ -14,10 +15,11 @@ const Hero = () => {
               insights
             </p>
             <div className="flex gap-5">
-              <Button text="Sign Up for Free" href="/register" color="white" />
+              <Link to="/signup">
+                <Button text="Sign Up for Free" color="white" />
+              </Link>
               <Button
                 text="Discover Re-Flect"
-                href="/register"
                 color="black"
                 transparency={true}
               />

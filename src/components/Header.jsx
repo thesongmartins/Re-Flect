@@ -1,4 +1,5 @@
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -17,12 +18,12 @@ const Header = () => {
               <a href="#">Notifications</a>
             </li>
             <li>
-              <a href="#">Log In</a>
+              <Link to="/login">Log In</Link>
             </li>
             <li>
-              <a href="#">
-                <Button text="Get Started" href="/login" color="white" />
-              </a>
+              <Link to="/signup">
+                <Button text="Get Started" color="white" />
+              </Link>
             </li>
           </ul>
         </nav>
