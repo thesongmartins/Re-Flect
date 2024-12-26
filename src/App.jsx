@@ -4,7 +4,6 @@ import Home from "./pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-
 function App() {
   return (
     <>
