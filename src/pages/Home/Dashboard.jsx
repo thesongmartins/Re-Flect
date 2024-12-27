@@ -25,7 +25,7 @@ const ReflectApp = () => {
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
 
-  const API_URL = "https://api.example.com/notes"; // Replace with your API endpoint
+  const API_URL = "https://api.example.com/notes"; // I'll update code when backend is ready.
 
   useEffect(() => {
     fetchNotes();
@@ -119,10 +119,6 @@ const ReflectApp = () => {
   const handleDeleteMood = (moodId) => {
     setMoodLog((prev) => prev.filter((mood) => mood.id !== moodId));
   };
-
-  // const handleDeleteNote = (noteId) => {
-  //   setNotes((prev) => prev.filter((note) => note.id !== noteId));
-  // };
 
   const handleSignOut = () => {
     localStorage.clear();
