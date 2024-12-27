@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
-const Logout = ({ closeLogout }) => {
+const Logout = ({ handleSignOut }) => {
   const navigate = useNavigate();
-  const handleLogout = () => {
+  const signOut = () => {
     // Here you would handle the logout logic
     // e.g., clearing the user's session, etc.
     navigate("/login");
@@ -15,13 +15,13 @@ const Logout = ({ closeLogout }) => {
         </h2>
         <div className="flex items-center gap-4">
           <button
-            onClick={handleLogout}
+            onClick={signOut}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Log Out
           </button>
           <button
-            onClick={() => closeLogout(false)}
+            onClick={() => handleSignOut(false)}
             className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Cancel

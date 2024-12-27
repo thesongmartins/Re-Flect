@@ -12,6 +12,8 @@ import {
   Trash,
   Loader,
   Save,
+  X,
+  Menu,
 } from "lucide-react";
 
 const ReflectApp = () => {
@@ -24,6 +26,7 @@ const ReflectApp = () => {
   const [error, setError] = useState("");
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const API_URL = "https://api.example.com/notes"; // I'll update code when backend is ready.
 
@@ -128,22 +131,45 @@ const ReflectApp = () => {
     setActiveSection("Notes");
   };
 
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
   return (
     <div
       className={`min-h-screen ${
         isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
       }`}
     >
-      <div className="flex">
+      {/* Mobile Header */}
+      <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+        <h1 className="text-xl font-bold">Re-flect</h1>
+        <button onClick={toggleSidebar} className="p-2">
+          {isSidebarOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
+        </button>
+      </div>
+
+      <div className="flex flex-col lg:flex-row">
+        {/* Sidebar */}
         <div
-          className={`w-64 border-r p-6 flex flex-col h-screen ${
+          className={`
+          fixed lg:static inset-0 z-20 
+          w-64 lg:w-64 
+          transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
+          lg:translate-x-0 
+          transition-transform duration-200 ease-in-out
+          border-r p-6 flex flex-col h-screen
+          ${
             isDarkMode
               ? "border-gray-700 bg-gray-800"
               : "border-gray-200 bg-white"
-          }`}
+          }
+        `}
         >
           <div className="mb-8 flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Re-flect</h1>
+            <h1 className="text-2xl font-bold hidden lg:block">Re-flect</h1>
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -156,12 +182,15 @@ const ReflectApp = () => {
             </button>
           </div>
 
-          <nav className="flex-1">
+          <nav className="flex-1 space-y-2">
             {menuItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => setActiveSection(item.name)}
-                className={`w-full text-left mb-2 p-3 rounded-lg flex items-center ${
+                onClick={() => {
+                  setActiveSection(item.name);
+                  setIsSidebarOpen(false);
+                }}
+                className={`w-full text-left p-3 rounded-lg flex items-center ${
                   activeSection === item.name
                     ? isDarkMode
                       ? "bg-blue-900"
@@ -188,9 +217,11 @@ const ReflectApp = () => {
           </button>
         </div>
 
-        <div className="flex-1 flex flex-col">
+        {/* Main Content */}
+        <div className="flex-1 lg:ml-64">
+          {/* Search Bar */}
           <div
-            className={`p-6 border-b ${
+            className={`p-4 lg:p-6 border-b ${
               isDarkMode
                 ? "border-gray-700 bg-gray-800"
                 : "border-gray-200 bg-white"
@@ -211,7 +242,7 @@ const ReflectApp = () => {
           </div>
 
           {activeSection === "Notes" && (
-            <div className="flex-1 p-6">
+            <div className="flex-1 p-4 lg:p-6">
               {error && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                   {error}
@@ -220,7 +251,7 @@ const ReflectApp = () => {
 
               {isNewNoteOpen ? (
                 <div
-                  className={`p-6 rounded-lg ${
+                  className={`p-4 lg:p-6 rounded-lg ${
                     isDarkMode ? "bg-gray-800" : "bg-white"
                   } shadow`}
                 >
@@ -284,7 +315,7 @@ const ReflectApp = () => {
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {notes.map((note) => (
                     <div
                       key={note.id}
@@ -296,7 +327,7 @@ const ReflectApp = () => {
                     >
                       <button
                         onClick={() => handleDeleteNote(note.id)}
-                        className="absolute top-2 right-2 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-2 right-2 p-2 text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                       >
                         <Trash className="w-4 h-4" />
                       </button>
@@ -325,11 +356,11 @@ const ReflectApp = () => {
           )}
 
           {activeSection === "Log Mood" && (
-            <div className="flex-1 p-6">
+            <div className="flex-1 p-4 lg:p-6">
               <h2 className="text-xl font-semibold mb-6">
                 How are you feeling today?
               </h2>
-              <div className="flex space-x-4">
+              <div className="flex flex-wrap gap-4">
                 {moodOptions.map((mood) => (
                   <button
                     key={mood.type}
@@ -364,12 +395,12 @@ const ReflectApp = () => {
                           {moodOptions.find((m) => m.type === mood.type)?.emoji}
                         </span>
                         <div className="flex items-center space-x-4">
-                          <span className="text-sm text-gray-500">
+                          <span className="text-xs sm:text-sm text-gray-500">
                             {new Date(mood.timestamp).toLocaleString()}
                           </span>
                           <button
                             onClick={() => handleDeleteMood(mood.id)}
-                            className="text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                           >
                             <Trash className="w-4 h-4" />
                           </button>
@@ -382,7 +413,7 @@ const ReflectApp = () => {
           )}
 
           <div
-            className={`p-6 max-w-md ml-auto rounded-lg m-6 ${
+            className={`p-4 lg:p-6 mx-4 lg:mx-6 mb-6 rounded-lg ${
               isDarkMode ? "bg-gray-800" : "bg-gray-50"
             }`}
           >

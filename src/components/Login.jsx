@@ -62,9 +62,16 @@ const Login = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
+              onClick={() => {
+                // Perform login logic here
+                // If login is successful, redirect to dashboard
+                window.location.href = "/dashboard";
+              }}
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 w-full text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 w-full
+              text-white font-bold py-2 px-4 rounded"
             >
+              {" "}
               Log In
             </button>
           </div>
