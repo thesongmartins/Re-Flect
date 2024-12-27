@@ -82,7 +82,7 @@ const Signup = () => {
             <button
               type="submit"
               onChange={handleSubmit}
-              className="bg ```javascript bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg ```javascript bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Sign Up
             </button>
