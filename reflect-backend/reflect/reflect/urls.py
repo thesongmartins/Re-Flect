@@ -18,6 +18,8 @@ Including another URLconf
 from django.http import JsonResponse
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 def root_view(request):
     return JsonResponse({"message": "Welcome to the Re-Flect API!"})
@@ -28,3 +30,6 @@ urlpatterns = [
     path("api/users/", include("users.urls")),
     path("api/journal/", include("journal.urls")),
 ]
+
+if settings.DEBUG:  # Only serve media files in development
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
