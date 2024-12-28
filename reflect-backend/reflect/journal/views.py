@@ -1,7 +1,8 @@
 from rest_framework import viewsets
-from .models import JournalEntry, Prompt, Tag, Mood
-from .serializers import JournalEntrySerializer, PromptSerializer, TagSerializer, MoodSerializer
 from rest_framework.permissions import IsAuthenticated
+from .models import JournalEntry, Media, Tag, Mood
+from .serializers import JournalEntrySerializer, MediaSerializer, TagSerializer, MoodSerializer
+from .utils import analyze_sentiment
 
 class JournalEntryViewSet(viewsets.ModelViewSet):
     queryset = JournalEntry.objects.all()
@@ -9,11 +10,17 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        journal_entry = serializer.save(user=self.request.user)
 
-class PromptViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Prompt.objects.all()
-    serializer_class = PromptSerializer
+        # Perform sentiment analysis using Hugging Face
+        sentiment = analyze_sentiment(journal_entry.content)
+        journal_entry.sentiment_label = sentiment['label']
+        journal_entry.sentiment_score = sentiment['score']
+        journal_entry.save()
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
