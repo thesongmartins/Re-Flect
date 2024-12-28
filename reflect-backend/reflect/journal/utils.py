@@ -1,18 +1,12 @@
-from transformers import pipeline
+import speech_recognition as sr
 
-# Load sentiment analysis pipeline from Hugging Face Transformers
-sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
-
-def analyze_sentiment(text):
-    """
-    Perform sentiment analysis using Hugging Face Transformers.
-    Returns a dictionary with sentiment score and label.
-    """
+def transcribe_audio(audio_file_path):
+    recognizer = sr.Recognizer()
+    with sr.AudioFile(audio_file_path) as source:
+        audio = recognizer.record(source)
     try:
-        analysis = sentiment_analyzer(text[:512])  # Limit input to 512 tokens
-        result = analysis[0]
-        sentiment_label = result['label']
-        sentiment_score = result['score']
-        return {"label": sentiment_label, "score": sentiment_score}
-    except Exception as e:
-        return {"label": "Neutral", "score": 0.0}
+        return recognizer.recognize_google(audio)
+    except sr.UnknownValueError:
+        return "Could not understand the audio"
+    except sr.RequestError:
+        return "Could not process the audio"
