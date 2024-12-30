@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Logout from "../../components/LogOut";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   FileEdit,
@@ -17,6 +19,7 @@ import {
 } from "lucide-react";
 
 const ReflectApp = () => {
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("Notes");
   const [searchQuery, setSearchQuery] = useState("");
   const [notes, setNotes] = useState([]);
@@ -27,6 +30,7 @@ const ReflectApp = () => {
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isloggedOut, setIsloggedOut] = useState(false);
 
   const API_URL = "https://api.example.com/notes"; // I'll update code when backend is ready.
 
@@ -129,6 +133,7 @@ const ReflectApp = () => {
     setMoodLog([]);
     setSearchQuery("");
     setActiveSection("Notes");
+    navigate("/login");
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -139,6 +144,9 @@ const ReflectApp = () => {
         isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
       }`}
     >
+      {isloggedOut && (
+        <Logout handleSignOut={handleSignOut} setIsLoggedOut={setIsloggedOut} />
+      )}
       {/* Mobile Header */}
       <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
         <h1 className="text-xl font-bold">Re-flect</h1>
@@ -207,7 +215,7 @@ const ReflectApp = () => {
           </nav>
 
           <button
-            onClick={handleSignOut}
+            onClick={() => setIsloggedOut(true)}
             className="w-full text-left p-3 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500/20 mt-auto"
           >
             <span className="flex items-center">
@@ -218,7 +226,7 @@ const ReflectApp = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 lg:ml-64">
+        <div className="flex-1 lg:ml-16">
           {/* Search Bar */}
           <div
             className={`p-4 lg:p-6 border-b ${
