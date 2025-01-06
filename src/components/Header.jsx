@@ -15,7 +15,8 @@ const Header = () => {
             <li>
               <a href="#">Contact Us</a>
             </li>
-            <li>
+            <li className="flex flex-row gap-[2px] items-center">
+              <IoIosNotifications />
               <a href="#">Notifications</a>
             </li>
             <li>
