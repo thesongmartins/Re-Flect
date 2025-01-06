@@ -20,27 +20,27 @@ import {
 
 const ReflectApp = () => {
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState("Notes");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [notes, setNotes] = useState([]);
-  const [moodLog, setMoodLog] = useState([]);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
-  const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isloggedOut, setIsloggedOut] = useState(false);
+  const [activeSection, setActiveSection] = useState("Notes"); // State to track the active section
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [notes, setNotes] = useState([]); // State to store notes
+  const [moodLog, setMoodLog] = useState([]); // State to store mood logs
+  const [isDarkMode, setIsDarkMode] = useState(false); // State to toggle dark mode
+  const [isLoading, setIsLoading] = useState(false); // State to track loading status
+  const [error, setError] = useState(""); // State to store error messages
+  const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" }); // State for new note
+  const [isNewNoteOpen, setIsNewNoteOpen] = useState(false); // State to toggle new note form
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to toggle sidebar
+  const [isloggedOut, setIsloggedOut] = useState(false); // State to track logout status
 
-  const API_URL = "https://api.example.com/notes"; // I'll update code when backend is ready.
+  const API_URL = "https://api.example.com/notes"; // API URL for notes
 
   useEffect(() => {
-    fetchNotes();
+    fetchNotes(); // Fetch notes on component mount
     const savedMoodLog = localStorage.getItem("moodLog");
     const savedTheme = localStorage.getItem("theme");
 
-    if (savedMoodLog) setMoodLog(JSON.parse(savedMoodLog));
-    if (savedTheme === "dark") setIsDarkMode(true);
+    if (savedMoodLog) setMoodLog(JSON.parse(savedMoodLog)); // Load saved mood log from local storage
+    if (savedTheme === "dark") setIsDarkMode(true); // Load saved theme from local storage
   }, []);
 
   const fetchNotes = async () => {
@@ -49,10 +49,10 @@ const ReflectApp = () => {
       const response = await fetch(API_URL);
       if (!response.ok) throw new Error("Failed to fetch notes");
       const data = await response.json();
-      setNotes(data);
+      setNotes(data); // Set fetched notes to state
     } catch (err) {
       console.error(err);
-      setError("Failed to load notes. Please try again later.");
+      setError("Failed to load notes. Please try again later."); // Set error message
     } finally {
       setIsLoading(false);
     }
@@ -74,12 +74,11 @@ const ReflectApp = () => {
 
       if (!response.ok) throw new Error("Failed to create note");
       const createdNote = await response.json();
-      setNotes((prev) => [...prev, createdNote]);
-      setIsNewNoteOpen(false);
+      setNotes((prev) => [...prev, createdNote]); // Add new note to state
+      setIsNewNoteOpen(false); // Close new note form
     } catch (err) {
       console.error(err);
-      setError("Failed to create note. Please try again.");
-      setError("Failed to create note. Please try again.");
+      setError("Failed to create note. Please try again."); // Set error message
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +92,7 @@ const ReflectApp = () => {
       });
     } catch (err) {
       console.error(err);
-      setError("Failed to delete note. Please try again.");
+      setError("Failed to delete note. Please try again."); // Set error message
     } finally {
       setIsLoading(false);
     }
@@ -104,7 +103,7 @@ const ReflectApp = () => {
     { name: "Log Mood", icon: <Sticker className="w-5 h-5" /> },
     { name: "Analytics", icon: <PieChart className="w-5 h-5" /> },
     { name: "Settings", icon: <Settings className="w-5 h-5" /> },
-  ];
+  ]; // Menu items for sidebar
 
   const moodOptions = [
     { type: "happy", emoji: "😊" },
@@ -112,7 +111,7 @@ const ReflectApp = () => {
     { type: "neutral", emoji: "😐" },
     { type: "excited", emoji: "🎉" },
     { type: "tired", emoji: "😴" },
-  ];
+  ]; // Mood options for logging mood
 
   const handleLogMood = (type) => {
     const newMood = {
@@ -120,11 +119,11 @@ const ReflectApp = () => {
       type,
       timestamp: new Date().toISOString(),
     };
-    setMoodLog((prev) => [...prev, newMood]);
+    setMoodLog((prev) => [...prev, newMood]); // Add new mood to state
   };
 
   const handleDeleteMood = (moodId) => {
-    setMoodLog((prev) => prev.filter((mood) => mood.id !== moodId));
+    setMoodLog((prev) => prev.filter((mood) => mood.id !== moodId)); // Delete mood from state
   };
 
   const handleSignOut = () => {
@@ -133,10 +132,10 @@ const ReflectApp = () => {
     setMoodLog([]);
     setSearchQuery("");
     setActiveSection("Notes");
-    navigate("/login");
+    navigate("/login"); // Navigate to login page
   };
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar
 
   return (
     <div
