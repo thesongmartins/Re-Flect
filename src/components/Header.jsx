@@ -1,5 +1,6 @@
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import { IoIosNotifications } from "react-icons/io";
 
 const Header = () => {
   return (
@@ -14,7 +15,8 @@ const Header = () => {
             <li>
               <a href="#">Contact Us</a>
             </li>
-            <li>
+            <li className="flex flex-row gap-[2px] items-center">
+              <IoIosNotifications />
               <a href="#">Notifications</a>
             </li>
             <li>
