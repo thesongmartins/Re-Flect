@@ -1,12 +1,14 @@
 import heroImg from "../assets/hero-img.svg";
 import graph from '../assets/graph.jpg';
 import mood from '../assets/mood.jpg'
+import voice from '../assets/voice.jpg'
+
 
 export const features = [{
     id: 1,
     title: "Voice Journaling",
     description: "Share your heart without lifting a finger",
-    img: heroImg
+    img: voice
 
 },
 {
