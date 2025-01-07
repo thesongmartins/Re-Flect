@@ -34,7 +34,7 @@ const HowItWorks = () => {
               time.
             </p>
           </div>
-          <div className="border border-blue-300 rounded p-10">
+          <div className="border border-blue-300 rounded p-10 flex flex-col justify-center items-center gap-2">
             <img src={check} alt="" />
             <h2 className="font-bold">Reflect and Track</h2>
             <p>
