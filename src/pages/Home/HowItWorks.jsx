@@ -23,8 +23,10 @@ const HowItWorks = () => {
               needs and goals.
             </p>
           </div>
-          <div className="border border-blue-300 rounded p-10">
+          <div className="border border-blue-300 rounded p-10 flex flex-col justify-center items-center gap-2">
+            <div>
             <img src={note} alt="" />
+            </div>
             <h2 className="font-bold">Choose Entry Type</h2>
             <p>
               Let our guided prompts inspire deeper reflection or freely express
