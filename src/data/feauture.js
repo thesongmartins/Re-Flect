@@ -1,6 +1,6 @@
 import heroImg from "../assets/hero-img.svg";
 import graph from '../assets/graph.jpg';
-
+import mood from '../assets/mood.jpg'
 
 export const features = [{
     id: 1,
@@ -20,7 +20,7 @@ export const features = [{
     id: 3,
     title: "Mood Tracker",
     description: "Understand your emotional pattern and find balance",
-    img: heroImg
+    img: mood
 
 },
 {
