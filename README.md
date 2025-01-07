@@ -89,3 +89,15 @@ Re-Flect is not just a simple app; it's a complete digital journaling solution t
 - Hugging Face APIs for AI-driven insights
 
 ---
+
+## 👥 Development Team
+
+### Backend Engineers
+- **Obasi Peace**
+- **Hezekiah Olushola**
+
+### Frontend Engineers
+- **Song Martins**
+- **Hannah Sado**
+
+---
