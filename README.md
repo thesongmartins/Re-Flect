@@ -69,3 +69,23 @@ Re-Flect is not just a simple app; it's a complete digital journaling solution t
 
 ---
 
+## 📚 Technology Stack
+
+### **Backend**
+- Django
+- Django REST Framework
+- PostgreSQL
+- Python
+
+### **Frontend**
+- React (JSX)
+- JavaScript
+- Tailwind CSS
+- HTML
+
+### **Other Tools**
+- Firebase for cloud storage
+- Google OAuth for authentication
+- Hugging Face APIs for AI-driven insights
+
+---
