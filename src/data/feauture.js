@@ -1,4 +1,6 @@
 import heroImg from "../assets/hero-img.svg";
+import graph from '../assets/graph.jpg';
+
 
 export const features = [{
     id: 1,
@@ -25,6 +27,6 @@ export const features = [{
     id: 4,
     title: "Timeline View",
     description: "Witness your growth and transformation",
-    img: heroImg
+    img: graph
 
 }]
