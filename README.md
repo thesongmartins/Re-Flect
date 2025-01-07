@@ -19,15 +19,15 @@ Re-Flect harnesses the power of artificial intelligence to provide a deeper unde
 Track and visualize your emotional journey with Re-Flect's mood tracking feature:
 - **Emotion Visualization**: See your mood patterns over time, helping you better understand how different experiences impact your emotions.
 - **Identify Patterns & Triggers**: Identify recurring emotional trends and specific events that influence your mood, empowering you to manage your emotional well-being proactively.
-- Visualize your emotional trends over time.
-- Pinpoint patterns and triggers, enabling proactive mental health management.
+- **Trend Visualization**: Monitor and analyze emotional patterns over time through intuitive charts.
+- **Trigger Identification**: Understand specific events or behaviors that influence your emotional state.
 
 ### **Customizable Templates**
 Re-Flect allows you to personalize your journaling experience:
 - **Template Variety**: Choose from a wide range of templates designed for various journaling needs, including gratitude journaling, mood tracking, and self-reflection.
 - **Fully Customizable**: Tailor your templates to fit your unique personal growth and mindfulness goals, ensuring a journaling experience that suits your preferences.
-- Choose from a variety of flexible templates.
-- Personalize your journaling experience to suit your unique needs and preferences.
+- **Diverse Options**: Select from a variety of templates for gratitude journaling, daily reflections, or goal setting.
+- **Full Personalization**: Modify templates to suit your unique journaling needs and personal goals.
 
 ### **Secure and Private**
 Your privacy is our top priority:
@@ -47,7 +47,10 @@ Enjoy an intuitive, seamless journaling experience:
 ## 🚀 Project Highlights
 
 Re-Flect showcases significant achievements across various domains, reflecting the collaborative efforts of a highly skilled development team.
+
 Re-Flect is not just a simple app; it's a complete digital journaling solution that integrates advanced technologies to enhance your personal growth journey. With features like AI-driven insights, mood tracking, and customizable journaling templates, Re-Flect is a comprehensive tool for cultivating mindfulness and achieving greater self-awareness.
+
+Re-Flect integrates advanced technologies to deliver a feature-rich and scalable platform. Here's how it stands out:
 
 ### **Backend Engineering**
 - Designed a robust and scalable backend using **Django** and **Django REST Framework** for seamless functionality.
@@ -71,22 +74,13 @@ Re-Flect is not just a simple app; it's a complete digital journaling solution t
 
 ## 📚 Technology Stack
 
-### **Backend**
-- Django
-- Django REST Framework
-- PostgreSQL
-- Python
+| Category | Tools |
+|------------------|--------------------------------------------|
+| **Backend** | Django, Django REST Framework, PostgreSQL, Python |
+| **Frontend** | React (JSX), Tailwind CSS, HTML, JavaScript|
+| **AI Integration**| Hugging Face APIs |
+| **Others** | Firebase (Cloud Storage), Google OAuth |
 
-### **Frontend**
-- React (JSX)
-- JavaScript
-- Tailwind CSS
-- HTML
-
-### **Other Tools**
-- Firebase for cloud storage
-- Google OAuth for authentication
-- Hugging Face APIs for AI-driven insights
 
 ---
 
