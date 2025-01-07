@@ -1,5 +1,6 @@
 import user from '../../assets/User-plus.svg'
 import note from '../../assets/Notes.svg'
+import check from '../../assets/Checklist.svg'
 
 const HowItWorks = () => {
   return (
@@ -30,7 +31,7 @@ const HowItWorks = () => {
             </p>
           </div>
           <div className="border border-blue-300 rounded p-10">
-            <img src="" alt="" />
+            <img src={check} alt="" />
             <h2 className="font-bold">Reflect and Track</h2>
             <p>
               Log your daily moods and track your emotional pattern overtime.
