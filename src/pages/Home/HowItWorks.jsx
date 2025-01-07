@@ -1,3 +1,6 @@
+import user from '../../assets/User-plus.svg'
+
+
 const HowItWorks = () => {
   return (
     <>
@@ -9,7 +12,7 @@ const HowItWorks = () => {
         </p>
         <div className="flex rounded-lg p-10 gap-3">
           <div className="border border-blue-300 rounded p-10">
-            <img src="" alt="" />
+            <img src={user} alt="" />
             <h2 className="font-bold">Sign Up</h2>
             <p>
               Create an account by signing up with your email. Set your

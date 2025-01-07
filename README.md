@@ -171,3 +171,15 @@ We welcome contributions to improve Re-Flect!
 5. Open a pull request for review.
 
 ---
+
+## 📞 Contact
+
+For questions, suggestions, or support, reach out to the development team or open an issue in the repository.
+
+obasipeace412@yahoo.com
+sadohannahfabohns@gmail.com
+
+
+
+Embrace mindfulness and self-awareness with **Re-Flect**—your digital journaling companion. 🚀
+```
