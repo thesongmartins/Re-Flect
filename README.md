@@ -135,3 +135,19 @@ Ensure the following tools are installed:
    ```bash
    python manage.py runserver
    ```
+
+### Frontend Setup
+1. Navigate to the frontend directory:
+   ```bash
+   cd ../frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the frontend development server:
+   ```bash
+   npm start
+   ```
+
+---
