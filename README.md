@@ -101,3 +101,37 @@ Re-Flect is not just a simple app; it's a complete digital journaling solution t
 - **Hannah Sado**
 
 ---
+
+
+## 🛠️ Installation and Setup
+
+### Prerequisites
+Ensure the following tools are installed:
+- Python 3.x
+- Node.js
+- PostgreSQL
+- Git
+
+### Backend Setup
+1. Clone the repository and navigate to the backend directory:
+   ```bash
+   git clone https://github.com/thesongmartins/Re-Flect.git
+   cd Re-Flect/backend
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv env
+   source env/bin/activate  # Windows: env\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Apply database migrations:
+   ```bash
+   python manage.py migrate
+   ```
+5. Start the backend server:
+   ```bash
+   python manage.py runserver
+   ```
