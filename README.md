@@ -168,7 +168,7 @@ We welcome contributions to improve Re-Flect!
 
 ## 📞 Contact
 
-For questions, suggestions, or support, reach out to the development team or open an issue in the repository.
+For questions, suggestions, or support, feel free to reach out to us:
 
 obasipeace412@yahoo.com
 martinsjehoshaphat97@gmail.com
