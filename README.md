@@ -151,3 +151,23 @@ Ensure the following tools are installed:
    ```
 
 ---
+
+## 🌍 Contributing
+
+We welcome contributions to improve Re-Flect!  
+1. Fork the repository.  
+2. Create a feature branch:  
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit your changes:  
+   ```bash
+   git commit -m "Add: Description of feature or fix"
+   ```
+4. Push to your branch:  
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Open a pull request for review.
+
+---
