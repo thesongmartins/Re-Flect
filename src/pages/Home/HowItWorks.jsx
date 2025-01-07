@@ -12,8 +12,10 @@ const HowItWorks = () => {
           freeform entries
         </p>
         <div className="flex rounded-lg p-10 gap-3">
-          <div className="border border-blue-300 rounded p-10">
+          <div className="border border-blue-300 rounded p-10 flex flex-col justify-center items-center gap-2">
+            <div>
             <img src={user} alt="" />
+            </div>
             <h2 className="font-bold">Sign Up</h2>
             <p>
               Create an account by signing up with your email. Set your
