@@ -2,7 +2,7 @@ import heroImg from "../assets/hero-img.svg";
 import graph from '../assets/graph.jpg';
 import mood from '../assets/mood.jpg'
 import voice from '../assets/voice.jpg'
-
+import upload from '../assets/upload.svg'
 
 export const features = [{
     id: 1,
@@ -15,7 +15,7 @@ export const features = [{
     id: 2,
     title: "Media Upload",
     description: "Paint a vivid picture of your experience",
-    img: heroImg
+    img: upload
 
 },
 {
