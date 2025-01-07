@@ -1,5 +1,5 @@
 import user from '../../assets/User-plus.svg'
-
+import note from '../../assets/Notes.svg'
 
 const HowItWorks = () => {
   return (
@@ -21,7 +21,7 @@ const HowItWorks = () => {
             </p>
           </div>
           <div className="border border-blue-300 rounded p-10">
-            <img src="" alt="" />
+            <img src={note} alt="" />
             <h2 className="font-bold">Choose Entry Type</h2>
             <p>
               Let our guided prompts inspire deeper reflection or freely express
