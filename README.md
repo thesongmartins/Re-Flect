@@ -8,7 +8,7 @@ Whether you're reflecting on daily events, monitoring moods, or engaging in deep
 
 ## 📑 Table of Contents
 
-1. [Key Features](#-key-features)
+1. [Key Features](#key-features)
    - [AI-Powered Insights](#ai-powered-insights)
    - [Mood Tracking](#mood-tracking)
    - [Customizable Templates](#customizable-templates)
@@ -22,7 +22,7 @@ Whether you're reflecting on daily events, monitoring moods, or engaging in deep
    - [Summary of Technical Highlights](#summary-of-technical-highlights)
    - [User-Centric Approach](#user-centric-approach)
 3. [📚 Technology Stack](#technology-stack)
-4. [👥 Development Team](#-development-team)
+4. [👥 Development Team](#development-team)
 5. [🛠️ Installation and Setup](#installation-and-setup)
    - [Prerequisites](#prerequisites)
    - [Backend Setup](#backend-setup)
