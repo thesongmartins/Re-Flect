@@ -80,16 +80,15 @@ Re-Flect is designed with you in mind:
 
 ---
 
-## 👥 Development Team
+## 👥 **Development Team**
 
-### Backend Engineers
-- **Obasi Peace**
-- **Hezekiah Olushola**
+### 🚀 **Backend Engineers**
+- **[Obasi Peace](https://github.com/DevHeart1)**
+- **[Hezekiah Olushola](https://github.com/HezekiahsDev)**
 
-### Frontend Engineers
-- **Song Martins**
-- **Hannah Sado**
-
+### 🎨 **Frontend Engineers**
+- **[Song Martins](https://github.com/thesongmartins)**
+- **[Hannah Sado](https://github.com/Sado1111)**
 ---
 
 
