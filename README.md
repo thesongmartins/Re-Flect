@@ -6,7 +6,36 @@ Whether you're reflecting on daily events, monitoring moods, or engaging in deep
 
 ---
 
-## 🌟 **Key Features**  
+## 📑 Table of Contents
+
+1. [Key Features](#-key-features)
+   - [AI-Powered Insights](#ai-powered-insights)
+   - [Mood Tracking](#mood-tracking)
+   - [Customizable Templates](#customizable-templates)
+   - [Secure and Private](#secure-and-private)
+   - [User-Friendly Interface](#user-friendly-interface)
+2. [Project Highlights](#project-highlights)
+   - [Backend Engineering](#backend-engineering)
+   - [Frontend Development](#frontend-development)
+   - [AI and Machine Learning Integration](#ai-and-machine-learning-integration)
+   - [Cross-Team Collaboration](#cross-team-collaboration)
+   - [Summary of Technical Highlights](#summary-of-technical-highlights)
+   - [User-Centric Approach](#user-centric-approach)
+3. [📚 Technology Stack](#technology-stack)
+4. [👥 Development Team](#-development-team)
+5. [🛠️ Installation and Setup](#installation-and-setup)
+   - [Prerequisites](#prerequisites)
+   - [Backend Setup](#backend-setup)
+   - [Frontend Setup](#frontend-setup)
+6. [🤝 Contributing](#contributing)
+7. [🛡️ FAQs](#faqs)
+8. [🌱 Future Plans](#future-plans)
+9. [🙏 Acknowledgments](#acknowledgments)
+10. [📞 Contact Us](#contact-us)
+
+---
+
+## **Key Features**  
 
 ### **AI-Powered Insights**  
 Harness the power of AI for a smarter journaling experience:  
