@@ -176,6 +176,16 @@ Use the "Forgot Password" option on the login screen to reset your password via 
 
 ---
 
+## 🌱 **Future Plans**  
+
+- **📥 Offline Mode**: Allow users to journal without internet connectivity.  
+- **📜 Export Features**: Export journals to PDF, Word, or other formats.  
+- **📅 Calendar Integration**: Sync your journaling schedule with your calendar.  
+- **🌐 Language Support**: Introduce multilingual support for global users.  
+
+
+---
+
 ## 📞 Contact
 
 For questions, suggestions, or support, feel free to reach out to us:
