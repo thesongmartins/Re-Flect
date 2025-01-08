@@ -98,8 +98,8 @@ Re-Flect is designed with you in mind:
 
 ---
 
-## Technology Stack 📚
-
+## Technology Stack 
+📚
 | Category | Tools |
 |------------------|--------------------------------------------|
 | **Backend** | Django, Django REST Framework, PostgreSQL, Python |
@@ -110,8 +110,8 @@ Re-Flect is designed with you in mind:
 
 ---
 
-## **Development Team** 👥 
-
+## **Development Team** 
+👥 
 ### 🚀 **Backend Engineers**
 - **[Obasi Peace](https://github.com/DevHeart1)**
 - **[Hezekiah Olushola](https://github.com/HezekiahsDev)**
@@ -122,8 +122,8 @@ Re-Flect is designed with you in mind:
 ---
 
 
-## 🛠️ **Installation and Setup**
-
+## **Installation and Setup**
+🛠️
 ### **Prerequisites**  
 Ensure the following tools are installed:
 - Python 3.x
@@ -171,8 +171,8 @@ Ensure the following tools are installed:
 
 ---
 
-## 🤝 **Contributing**
-
+## **Contributing**
+🤝 
 We welcome contributions to improve Re-Flect!  
 1. Fork the repository.  
 2. Create a feature branch:  
@@ -192,7 +192,7 @@ We welcome contributions to improve Re-Flect!
 
 ---
 
-## 🛡️ **FAQs**  
+## **FAQs**  
 
 ### **Q1: Is my data secure?**  
 Yes! Re-Flect uses state-of-the-art encryption protocols to ensure your data remains private and secure.  
@@ -206,7 +206,7 @@ Use the "Forgot Password" option on the login screen to reset your password via 
 
 ---
 
-## 🌱 **Future Plans**  
+## **Future Plans**  
 
 - **📥 Offline Mode**: Allow users to journal without internet connectivity.  
 - **📜 Export Features**: Export journals to PDF, Word, or other formats.  
@@ -215,7 +215,7 @@ Use the "Forgot Password" option on the login screen to reset your password via 
 
 ---
 
-## 🙏 **Acknowledgments**  
+## **Acknowledgments**  
 
 Special thanks to:  
 - The **Django** and **React** communities for providing extensive resources.  
@@ -224,7 +224,7 @@ Special thanks to:
 
 ---
 
-## 📞 **Contact Us**  
+## **Contact Us**  
 
 For support, suggestions, or inquiries:  
 📧 obasipeace412@yahoo.com  
