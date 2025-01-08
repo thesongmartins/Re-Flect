@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="flex justify-between ">
           <p className="font-bold text-xl">Re-Flect</p>
           <div>
-            <ul className="flex gap-10 cursor-pointer">
+            <ul className="flex gap-8 cursor-pointer">
               <li>
                 <a href="#">Home</a>
               </li>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <>
-      <section className="bg-hero pr-10 pl-10 flex gap-20 items-center">
+      <section className="bg-hero pr-10 pl-10 flex gap-20 items-center mx-auto">
         <div>
           <div className="pr-10 pl-10">
             <h2 className="font-bold text-6xl mb-5">
@@ -26,8 +26,8 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div>
-          <img src={heroImg} alt="" className="rounded w-[1000px] h-[1000px]" />
+        <div className=" ">
+          <img src={heroImg} alt="" className="rounded w-full"  />
         </div>
       </section>
     </>

@@ -5,6 +5,9 @@ import Signup from "./components/Signup";
 import Dashboard from "./pages/Home/Dashboard";
 import VerifyEmail from "./components/VerifyEmail";
 import Settings from "./components/Setting";
+
+
+
 function App() {
   return (
     <>
