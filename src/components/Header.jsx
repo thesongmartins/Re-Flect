@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <>
       <header className="bg-white flex justify-between items-center p-5">
-        <p className="ml-20 font-bold text-5xl">Re-Flect</p>
+        <p className="ml-20 font-bold text-5xl">Re-flect</p>
         <nav>
           <ul className="flex gap-7 md:gap-5 mr-20 items-center">
             <li>

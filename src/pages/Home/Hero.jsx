@@ -14,12 +14,12 @@ const Hero = () => {
               Re-flect empowers you to reflect on your day and gain valuable
               insights
             </p>
-            <div className="flex gap-5 mt-10">
+            <div className="flex gap-5 mt-12">
               <Link to="/signup">
                 <Button text="Sign Up for Free" color="white" />
               </Link>
               <Button
-                text="Discover Re-Flect"
+                text="Discover Re-flect"
                 color="black"
                 transparency={true}
               />
