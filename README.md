@@ -98,7 +98,7 @@ Re-Flect is designed with you in mind:
 
 ---
 
-## 📚 Technology Stack
+## Technology Stack
 
 | Category | Tools |
 |------------------|--------------------------------------------|
@@ -110,7 +110,7 @@ Re-Flect is designed with you in mind:
 
 ---
 
-## 👥 **Development Team**
+## **Development Team**
 
 ### 🚀 **Backend Engineers**
 - **[Obasi Peace](https://github.com/DevHeart1)**
