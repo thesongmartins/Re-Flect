@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vscode
+__pycache__/
+DjangoEnv/
