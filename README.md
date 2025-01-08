@@ -38,22 +38,22 @@ Experience an interface designed with simplicity and elegance:
 ## 🚀 **Project Highlights**  
 
 ### **Backend Engineering**
-- 🏗️ Scalable backend built with **Django** and **Django REST Framework**.
-- 🔗 Efficient RESTful APIs ensure smooth communication.
-- 🛡️ High-performance data handling with **PostgreSQL**.
+- Scalable backend built with **Django** and **Django REST Framework**.
+- Efficient RESTful APIs ensure smooth communication.
+- High-performance data handling with **PostgreSQL**.
 
 ### **Frontend Development**
-- ⚡ Dynamic user experience created using **React (JSX)**.
-- 🎨 Stylish and consistent UI with **Tailwind CSS**.
-- 📱 Fully responsive design for accessibility.
+- Dynamic user experience created using **React (JSX)**.
+- Stylish and consistent UI with **Tailwind CSS**.
+- Fully responsive design for accessibility.
 
 ### **AI and Machine Learning Integration**
-- 🤝 AI features powered by **Hugging Face APIs**.
-- 🌟 Enhance engagement with intelligent journaling suggestions.
+- AI features powered by **Hugging Face APIs**.
+- Enhance engagement with intelligent journaling suggestions.
 
 ### **Cross-Team Collaboration**
-- 🛠️ Version control with **Git**.
-- 🗂️ Project organization with **Trello**.
+- Version control with **Git**.
+- Project organization with **Trello**.
 
 ### 🔧 **Summary of Technical Highlights**  
 - **Backend**: Powered by **Django** and **Django REST Framework** for reliability and scalability.  
