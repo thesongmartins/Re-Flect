@@ -92,16 +92,16 @@ Re-Flect is designed with you in mind:
 ---
 
 
-## 🛠️ Installation and Setup
+## 🛠️ **Installation and Setup**
 
-### Prerequisites
+### **Prerequisites**  
 Ensure the following tools are installed:
 - Python 3.x
 - Node.js
 - PostgreSQL
 - Git
 
-### Backend Setup
+### **Backend Setup**
 1. Clone the repository and navigate to the backend directory:
    ```bash
    git clone https://github.com/thesongmartins/Re-Flect.git
@@ -125,7 +125,7 @@ Ensure the following tools are installed:
    python manage.py runserver
    ```
 
-### Frontend Setup
+### **Frontend Setup**
 1. Navigate to the frontend directory:
    ```bash
    cd ../frontend
@@ -141,7 +141,7 @@ Ensure the following tools are installed:
 
 ---
 
-## 🌍 Contributing
+## 🤝 **Contributing**
 
 We welcome contributions to improve Re-Flect!  
 1. Fork the repository.  
@@ -158,6 +158,21 @@ We welcome contributions to improve Re-Flect!
    git push origin feature/your-feature-name
    ```
 5. Open a pull request for review.
+
+
+---
+
+## 🛡️ **FAQs**  
+
+### **Q1: Is my data secure?**  
+Yes! Re-Flect uses state-of-the-art encryption protocols to ensure your data remains private and secure.  
+
+### **Q2: Can I use Re-Flect offline?**  
+Currently, an internet connection is required to access AI features and data synchronization. Offline mode is planned for future releases.  
+
+### **Q3: How can I reset my password?**  
+Use the "Forgot Password" option on the login screen to reset your password via email.  
+
 
 ---
 
