@@ -35,7 +35,7 @@ Experience an interface designed with simplicity and elegance:
 
 ---
 
-## 🚀 **Project Highlights**  
+## **Project Highlights**  
 
 ### **Backend Engineering**
 - Scalable backend built with **Django** and **Django REST Framework**.
