@@ -230,7 +230,7 @@ For support, suggestions, or inquiries:
 📧 obasipeace412@yahoo.com  
 📧 martinsjehoshaphat97@gmail.com  
 📧 sadohannahfabohns@gmail.com
-📧  
+📧 hezekiahs.dev@gmail.com
 
 --- 
 
