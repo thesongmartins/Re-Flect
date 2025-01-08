@@ -11,9 +11,9 @@ class JournalEntry(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # Media attachments (photos, videos, audio)
-    photo = models.ImageField(upload_to="journal_photos/", blank=True, null=True)
-    video = models.FileField(upload_to="journal_videos/", blank=True, null=True)
-    audio = models.FileField(upload_to="journal_audio/", blank=True, null=True)
+    photo_url = models.URLField(max_length=200, blank=True, null=True)
+    video_url = models.URLField(max_length=200, blank=True, null=True)
+    audio_url = models.URLField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.title
