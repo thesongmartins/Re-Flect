@@ -183,6 +183,14 @@ Use the "Forgot Password" option on the login screen to reset your password via 
 - **📅 Calendar Integration**: Sync your journaling schedule with your calendar.  
 - **🌐 Language Support**: Introduce multilingual support for global users.  
 
+---
+
+## 🙏 **Acknowledgments**  
+
+Special thanks to:  
+- The **Django** and **React** communities for providing extensive resources.  
+- The creators of **Hugging Face APIs** for their incredible AI tools.  
+- **GitHub** and **Trello** for making collaboration seamless.  
 
 ---
 
