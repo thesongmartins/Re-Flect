@@ -194,14 +194,17 @@ Special thanks to:
 
 ---
 
-## 📞 Contact
+## 📞 **Contact Us**  
 
-For questions, suggestions, or support, feel free to reach out to us:
+For support, suggestions, or inquiries:  
+📧 obasipeace412@yahoo.com  
+📧 martinsjehoshaphat97@gmail.com  
+📧 sadohannahfabohns@gmail.com
+📧  
 
-obasipeace412@yahoo.com
-martinsjehoshaphat97@gmail.com
-sadohannahfabohns@gmail.com
+--- 
 
+Embrace mindfulness and self-awareness with **Re-Flect**—your trusted digital journaling companion!
+Let Re-Flect guide you on your journey to self-discovery and mindfulness! 🌟  
 
-Embrace mindfulness and self-awareness with **Re-Flect**—your digital journaling companion. 🚀
-```
+--- 
