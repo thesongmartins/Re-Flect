@@ -8,27 +8,27 @@ Whether you're reflecting on daily events, monitoring moods, or engaging in deep
 
 ## 🌟 **Key Features**  
 
-### 🤖 **AI-Powered Insights**  
+### **AI-Powered Insights**  
 Harness the power of AI for a smarter journaling experience:  
 - **🧠 Sentiment Analysis**: Analyze the emotional tone of your entries in real time.  
 - **✍️ Personalized Prompts**: Receive insightful suggestions tailored to your writing style and emotional state.  
 
-### 🌈 **Mood Tracking**  
+### **Mood Tracking**  
 Discover trends and patterns in your emotional journey:  
 - **📊 Visual Mood Graphs**: View emotions over days, weeks, and months.  
 - **🔍 Trend Detection**: Spot recurring triggers and behavioral patterns.  
 
-### ✨ **Customizable Templates**  
+### **Customizable Templates**  
 Tailor your journaling experience to your preferences:  
 - **📚 Journaling Modes**: Gratitude, mindfulness, goal tracking, and more.  
 - **🛠️ Fully Editable**: Create templates that resonate with your goals.  
 
-### 🔒 **Secure and Private**  
+### **Secure and Private**  
 Built with your security in mind:  
 - **🔐 Advanced Encryption**: Protects your data at every level.  
 - **🗝️ User-First Ownership**: You have full control over your entries—no external access.  
 
-### 💻 **User-Friendly Interface**  
+### **User-Friendly Interface**  
 Experience an interface designed with simplicity and elegance:  
 - **🎨 Minimalist Aesthetic**: Clean, distraction-free design.  
 - **📱 Cross-Platform Compatibility**: Optimized for web, mobile, and tablets.  
