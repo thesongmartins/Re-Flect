@@ -14,7 +14,7 @@ const Hero = () => {
               Re-flect empowers you to reflect on your day and gain valuable
               insights
             </p>
-            <div className="flex gap-5">
+            <div className="flex gap-5 mt-10">
               <Link to="/signup">
                 <Button text="Sign Up for Free" color="white" />
               </Link>
