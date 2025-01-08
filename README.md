@@ -234,7 +234,7 @@ For support, suggestions, or inquiries:
 
 --- 
 
-Embrace mindfulness and self-awareness with **Re-Flect**—your trusted digital journaling companion!
-Let Re-Flect guide you on your journey to self-discovery and mindfulness! 🌟  
+Embrace mindfulness and self-awareness with **Re-Flect**— your trusted digital journaling companion!
+Let Re-Flect guide you on your journey to self-discovery and mindfulness! Absolutely fabulous🌟  
 
 --- 
