@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Logout from "../../components/LogOut";
 import { useNavigate } from "react-router-dom";
 import Setting from "../../components/Dashboard/Setting";
+import Analytics from "../../components/Dashboard/Analytics";
 import {
   Search,
   FileEdit,
@@ -442,63 +443,14 @@ const ReflectApp = () => {
 
           {activeSection === "Analytics" && (
             <div className="flex-1 p-4 lg:p-6">
-              <h2 className="text-xl font-semibold mb-6">Analytics</h2>
-              <div className="flex flex-wrap gap-4">
-                {moodOptions.map((mood) => (
-                  <button
-                    key={mood.type}
-                    onClick={() => handleLogMood(mood.type)}
-                    className={`p-4 rounded-lg text-2xl hover:scale-110 ${
-                      isDarkMode
-                        ? "bg-gray-800 hover:bg-gray-700"
-                        : "bg-white hover:bg-gray-50"
-                    } shadow`}
-                  >
-                    {mood.emoji}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-8">
-                <h3 className="text-lg font-semibold mb-4">
-                  Recent Mood History
-                </h3>
-                <div className="space-y-2">
-                  {moodLog
-                    .slice(-5)
-                    .reverse()
-                    .map((mood) => (
-                      <div
-                        key={mood.id}
-                        className={`p-3 rounded-lg flex justify-between items-center group ${
-                          isDarkMode ? "bg-gray-800" : "bg-gray-50"
-                        }`}
-                      >
-                        <span>
-                          {moodOptions.find((m) => m.type === mood.type)?.emoji}
-                        </span>
-                        <div className="flex items-center space-x-4">
-                          <span className="text-xs sm:text-sm text-gray-500">
-                            {new Date(mood.timestamp).toLocaleString()}
-                          </span>
-                          <button
-                            onClick={() => handleDeleteMood(mood.id)}
-                            className="text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
-                          >
-                            <Trash className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                </div>
+              <div className="">
+                <Analytics />
               </div>
             </div>
           )}
           {activeSection === "Settings" && (
-            <div className="flex-1 p-4 lg:p-6">
-              <div className="">
-                <Setting />
-              </div>
+            <div>
+              <Setting />
             </div>
           )}
 
