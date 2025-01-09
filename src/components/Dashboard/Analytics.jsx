@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BarChart,
   Bar,
@@ -25,7 +24,7 @@ function Analytics() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={moodData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            margin={{ top: 100, right: 0, left: 0, bottom: 100 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="type" />
