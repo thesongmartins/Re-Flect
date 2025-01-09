@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import VerifyEmail from "./components/VerifyEmail";
+import VerifyEmail from "./pages/Auth/VerifyEmail";
 import Settings from "./pages/Settings/Setting";
 import Loading from "./components/Loading";
 import useLoadingStore from "./store/loadingstore";
