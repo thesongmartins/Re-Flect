@@ -32,7 +32,7 @@ const ReflectApp = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isloggedOut, setIsloggedOut] = useState(false);
 
-  const API_URL = "https://api.example.com/notes"; // I'll update code when backend is ready.
+  const API_URL = "http://localhost:3000/notes"; // I'll update code when backend is ready.
 
   useEffect(() => {
     fetchNotes();
@@ -46,7 +46,7 @@ const ReflectApp = () => {
   const fetchNotes = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:3000/notes");
+      const response = await fetch(API_URL);
       if (!response.ok) throw new Error("Failed to fetch notes");
       const data = await response.json();
       setNotes(data);
@@ -61,7 +61,7 @@ const ReflectApp = () => {
   const handleCreateNote = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:3000/notes", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const ReflectApp = () => {
   const handleDeleteNote = async (noteId) => {
     try {
       setIsLoading(true);
-      await fetch(`${"http://localhost:3000/notes"}/${noteId}`, {
+      await fetch(`${API_URL}/${noteId}`, {
         method: "DELETE",
       });
     } catch (err) {
