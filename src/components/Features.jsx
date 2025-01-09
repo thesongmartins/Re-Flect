@@ -1,4 +1,4 @@
-import { features } from "../../data/feauture";
+import { features } from "../data/feauture";
 
 const Features = () => {
   // console.log(features);
