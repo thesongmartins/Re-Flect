@@ -340,9 +340,7 @@ const ReflectApp = () => {
                         <Trash className="w-4 h-4" />
                       </button>
                       <h3 className="font-semibold mb-2">{note.title}</h3>
-                      <p className="text-sm text-gray-500">
-                        {note.content}...
-                      </p>
+                      <p className="text-sm text-gray-500">{note.content}...</p>
                       <div className="mt-4 flex justify-between items-center">
                         <span className="text-xs text-gray-400">
                           {new Date(note.timestamp).toLocaleDateString()}
