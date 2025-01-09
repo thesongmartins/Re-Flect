@@ -12,94 +12,30 @@ import {
   Moon,
   Sticker,
   Sun,
-  Plus,
   Trash,
-  Loader,
-  Save,
   X,
   Menu,
 } from "lucide-react";
+import Notes from "../../components/Dashboard/Notes";
 
 const ReflectApp = () => {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("Notes");
   const [searchQuery, setSearchQuery] = useState("");
-  const [notes, setNotes] = useState([]);
+
   const [moodLog, setMoodLog] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
-  const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isloggedOut, setIsloggedOut] = useState(false);
 
-  const API_URL = "https://api.example.com/notes"; // I'll update code when backend is ready.
-
   useEffect(() => {
-    fetchNotes();
     const savedMoodLog = localStorage.getItem("moodLog");
     const savedTheme = localStorage.getItem("theme");
 
     if (savedMoodLog) setMoodLog(JSON.parse(savedMoodLog));
     if (savedTheme === "dark") setIsDarkMode(true);
   }, []);
-
-  const fetchNotes = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(API_URL);
-      if (!response.ok) throw new Error("Failed to fetch notes");
-      const data = await response.json();
-      setNotes(data);
-    } catch (err) {
-      console.error(err);
-      setError("Failed to load notes. Please try again later.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleCreateNote = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...newNote,
-          timestamp: new Date().toISOString(),
-        }),
-      });
-
-      if (!response.ok) throw new Error("Failed to create note");
-      const createdNote = await response.json();
-      setNotes((prev) => [...prev, createdNote]);
-      setIsNewNoteOpen(false);
-    } catch (err) {
-      console.error(err);
-      setError("Failed to create note. Please try again.");
-      setError("Failed to create note. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDeleteNote = async (noteId) => {
-    try {
-      setIsLoading(true);
-      await fetch(`${API_URL}/${noteId}`, {
-        method: "DELETE",
-      });
-    } catch (err) {
-      console.error(err);
-      setError("Failed to delete note. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const menuItems = [
     { name: "Notes", icon: <FileEdit className="w-5 h-5" /> },
@@ -252,135 +188,8 @@ const ReflectApp = () => {
           </div>
 
           {activeSection === "Notes" && (
-            <div className="flex-1 p-4 lg:p-6">
-              {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                  {error}
-                </div>
-              )}
-              <div className="flex-1 p-4 lg:p-6">
-                <h2 className="text-xl font-semibold mb-6">
-                  How are you feeling today?
-                </h2>
-                <div className="flex flex-wrap gap-4">
-                  {moodOptions.map((mood) => (
-                    <button
-                      key={mood.type}
-                      onClick={() => handleLogMood(mood.type)}
-                      className={`p-4 rounded-lg text-2xl hover:scale-110 ${
-                        isDarkMode
-                          ? "bg-gray-800 hover:bg-gray-700"
-                          : "bg-white hover:bg-gray-50"
-                      } shadow`}
-                    >
-                      {mood.emoji}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              {isNewNoteOpen ? (
-                <div
-                  className={`p-4 lg:p-6 rounded-lg ${
-                    isDarkMode ? "bg-gray-800" : "bg-white"
-                  } shadow`}
-                >
-                  <input
-                    type="text"
-                    placeholder="Note Title"
-                    className={`w-full mb-4 p-2 rounded ${
-                      isDarkMode ? "bg-gray-700" : "bg-gray-50"
-                    }`}
-                    value={newNote.title}
-                    onChange={(e) =>
-                      setNewNote((prev) => ({ ...prev, title: e.target.value }))
-                    }
-                  />
-                  <textarea
-                    placeholder="Note Content"
-                    className={`w-full mb-4 p-2 h-32 rounded ${
-                      isDarkMode ? "bg-gray-700" : "bg-gray-50"
-                    }`}
-                    value={newNote.content}
-                    onChange={(e) =>
-                      setNewNote((prev) => ({
-                        ...prev,
-                        content: e.target.value,
-                      }))
-                    }
-                  />
-                  <div className="flex justify-end space-x-2">
-                    <button
-                      onClick={() => setIsNewNoteOpen(false)}
-                      className="px-4 py-2 rounded bg-gray-500 text-white hover:bg-gray-600"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={handleCreateNote}
-                      disabled={isLoading}
-                      className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 flex items-center"
-                    >
-                      {isLoading ? (
-                        <Loader className="w-4 h-4 animate-spin mr-2" />
-                      ) : (
-                        <Save className="w-4 h-4 mr-2" />
-                      )}
-                      Save Note
-                    </button>
-                  </div>
-                </div>
-              ) : notes.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full">
-                  <FileEdit className="w-24 h-24 text-gray-300 mb-4" />
-                  <p className={isDarkMode ? "text-gray-400" : "text-gray-500"}>
-                    You do not have any notes.
-                  </p>
-                  <button
-                    onClick={() => setIsNewNoteOpen(true)}
-                    className="bg-blue-500 text-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-blue-600"
-                  >
-                    <Plus className="w-5 h-5" />
-                    <span>Start New Note</span>
-                  </button>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {notes.map((note) => (
-                    <div
-                      key={note.id}
-                      className={`p-4 rounded-lg ${
-                        isDarkMode
-                          ? "bg-gray-800 hover:bg-gray-700"
-                          : "bg-white hover:bg-gray-50"
-                      } shadow relative group`}
-                    >
-                      <button
-                        onClick={() => handleDeleteNote(note.id)}
-                        className="absolute top-2 right-2 p-2 text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
-                      >
-                        <Trash className="w-4 h-4" />
-                      </button>
-                      <h3 className="font-semibold mb-2">{note.title}</h3>
-                      <p className="text-sm text-gray-500">
-                        {note.content.substring(0, 100)}...
-                      </p>
-                      <div className="mt-4 flex justify-between items-center">
-                        <span className="text-xs text-gray-400">
-                          {new Date(note.timestamp).toLocaleDateString()}
-                        </span>
-                        {note.mood && (
-                          <span className="text-lg">
-                            {
-                              moodOptions.find((m) => m.type === note.mood)
-                                ?.emoji
-                            }
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+            <div>
+              <Notes />
             </div>
           )}
 
