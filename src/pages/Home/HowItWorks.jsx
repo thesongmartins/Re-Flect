@@ -11,7 +11,7 @@ const HowItWorks = () => {
           Reflect on your day, emotions, and thoughts with guided prompts or
           freeform entries
         </p>
-        <div className="flex rounded-lg p-10 gap-3">
+        <div className="flex flex-row max-lg:flex-col rounded-lg p-10 gap-3">
           <div className="border border-blue-300 rounded p-10 flex flex-col justify-center items-center gap-2">
             <div>
             <img src={user} alt="" />
