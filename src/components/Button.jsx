@@ -5,7 +5,7 @@ const Button = ({ text, href, color, transparency }) => {
       className={
         transparency
           ? "bg-transparent inline-block py-2 px-3 rounded-2xl"
-          : "bg-blue-500 inline-block py-2 px-3 rounded-2xl"
+          : "bg-blue-500 inline-block py-2 px-3 max-lg:py-3  rounded-2xl"
       }
     >
       <a href={href} style={{ color: `${color}` }}>
