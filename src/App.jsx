@@ -1,10 +1,10 @@
 import Home from "./pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Dashboard from "./pages/Home/Dashboard";
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import VerifyEmail from "./components/VerifyEmail";
-import Settings from "./components/Setting";
+import Settings from "./pages/Settings/Setting";
 import Loading from "./components/Loading";
 import useLoadingStore from "./store/loadingstore";
 

@@ -1,6 +1,6 @@
-import user from '../../assets/User-plus.svg'
-import note from '../../assets/Notes.svg'
-import check from '../../assets/Checklist.svg'
+import user from "../assets/User-plus.svg";
+import note from "../assets/Notes.svg";
+import check from "../assets/Checklist.svg";
 
 const HowItWorks = () => {
   return (
@@ -14,7 +14,7 @@ const HowItWorks = () => {
         <div className="flex rounded-lg p-10 gap-3">
           <div className="border border-blue-300 rounded p-10 flex flex-col justify-center items-center gap-2">
             <div>
-            <img src={user} alt="" />
+              <img src={user} alt="" />
             </div>
             <h2 className="font-bold">Sign Up</h2>
             <p>
@@ -25,7 +25,7 @@ const HowItWorks = () => {
           </div>
           <div className="border border-blue-300 rounded p-10 flex flex-col justify-center items-center gap-2">
             <div>
-            <img src={note} alt="" />
+              <img src={note} alt="" />
             </div>
             <h2 className="font-bold">Choose Entry Type</h2>
             <p>

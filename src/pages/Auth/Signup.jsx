@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useLoadingStore from "../store/loadingstore";
+import useLoadingStore from "../../store/loadingstore";
 import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const [email, setEmail] = useState("");
