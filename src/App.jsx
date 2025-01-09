@@ -5,12 +5,15 @@ import Signup from "./components/Signup";
 import Dashboard from "./pages/Home/Dashboard";
 import VerifyEmail from "./components/VerifyEmail";
 import Settings from "./components/Setting";
-
-
+import Loading from "./components/Loading";
+import useLoadingStore from "./store/loadingstore";
 
 function App() {
+  const { loading } = useLoadingStore();
+
   return (
     <>
+      {loading && <Loading />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

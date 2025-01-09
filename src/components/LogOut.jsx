@@ -3,7 +3,7 @@ const Logout = ({ handleSignOut, setIsLoggedOut }) => {
   return (
     <div className="min-h-screen bg-gray-100 fixed w-screen top-0 left-0 z-50 flex items-center justify-center">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="text-2xl text-black font-bold mb-4">
           Are you sure you want to log out?
         </h2>
         <div className="flex w-full justify-center items-center gap-4">

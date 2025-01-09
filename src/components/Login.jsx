@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useLoadingStore from "../store/loadingstore";
+import { useNavigate } from "react-router";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const { start, stop } = useLoadingStore();
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,7 +20,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    start();
     // Handle form submission here
+
+    setTimeout(() => {
+      navigate("/dashboard");
+      stop();
+    }, 2000);
   };
 
   return (
@@ -53,7 +63,7 @@ const Login = () => {
               value={password}
               onChange={handlePasswordChange}
             />
-            {passwordError && (
+            {passwordError && password && (
               <p className="text-red-500 text-xs mt-1">
                 {" "}
                 Password must contain at least one uppercase letter.
@@ -62,11 +72,6 @@ const Login = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
-              onClick={() => {
-                // Perform login logic here
-                // If login is successful, redirect to dashboard
-                window.location.href = "/dashboard";
-              }}
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 w-full
               text-white font-bold py-2 px-4 rounded"
