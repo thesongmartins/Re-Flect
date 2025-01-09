@@ -46,7 +46,7 @@ const ReflectApp = () => {
   const fetchNotes = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(API_URL);
+      const response = await fetch("http://localhost:3000/notes");
       if (!response.ok) throw new Error("Failed to fetch notes");
       const data = await response.json();
       setNotes(data);
@@ -61,7 +61,7 @@ const ReflectApp = () => {
   const handleCreateNote = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(API_URL, {
+      const response = await fetch("http://localhost:3000/notes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const ReflectApp = () => {
   const handleDeleteNote = async (noteId) => {
     try {
       setIsLoading(true);
-      await fetch(`${API_URL}/${noteId}`, {
+      await fetch(`${"http://localhost:3000/notes"}/${noteId}`, {
         method: "DELETE",
       });
     } catch (err) {
@@ -341,7 +341,7 @@ const ReflectApp = () => {
                       </button>
                       <h3 className="font-semibold mb-2">{note.title}</h3>
                       <p className="text-sm text-gray-500">
-                        {note.content.substring(0, 100)}...
+                        {note.content}...
                       </p>
                       <div className="mt-4 flex justify-between items-center">
                         <span className="text-xs text-gray-400">
