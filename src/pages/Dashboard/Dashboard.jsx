@@ -67,7 +67,7 @@ const ReflectApp = () => {
 
   const handleSignOut = () => {
     localStorage.clear();
-    setNotes([]);
+    // setNotes([]);
     setMoodLog([]);
     setSearchQuery("");
     setActiveSection("Notes");
