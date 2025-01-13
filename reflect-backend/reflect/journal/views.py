@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import JournalEntry, Tag, Mood
 from .serializers import JournalEntrySerializer, TagSerializer, MoodSerializer
-from .utils import transcribe_audio
 
 class JournalEntryViewSet(viewsets.ModelViewSet):
     queryset = JournalEntry.objects.all()
@@ -15,13 +14,6 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-    def perform_create(self, serializer):
-        journal_entry = serializer.save(user=self.request.user)
-        if journal_entry.audio:
-            transcription = transcribe_audio(journal_entry.audio.path)
-            journal_entry.content = f"{journal_entry.content}\n\n[Transcription: {transcription}]"
-            journal_entry.save()
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
