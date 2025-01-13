@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import JournalEntry, Tag, EntryTag, Mood
+from .models import JournalEntry, Tag, EntryTag, Mood, CalendarView
+import os
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +11,11 @@ class MoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mood
         fields = ['id', 'mood_type', 'mood_score', 'timestamp']
+
+class CalendarViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CalendarView
+        fields = '__all__'
 
 class JournalEntrySerializer(serializers.ModelSerializer):
     tags = serializers.ListField(

@@ -1,8 +1,8 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import JournalEntry, Tag, Mood
-from .serializers import JournalEntrySerializer, TagSerializer, MoodSerializer
+from .models import JournalEntry, Tag, Mood, CalendarView
+from .serializers import JournalEntrySerializer, TagSerializer, MoodSerializer, CalendarViewSerializer
 
 class JournalEntryViewSet(viewsets.ModelViewSet):
     queryset = JournalEntry.objects.all()
@@ -30,3 +30,7 @@ class MoodViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.queryset.filter(journal_entry__user=self.request.user)
+
+class CalendarViewSet(viewsets.ModelViewSet):
+    queryset = CalendarView.objects.all()
+    serializer_class = CalendarViewSerializer
