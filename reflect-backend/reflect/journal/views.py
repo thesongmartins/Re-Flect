@@ -1,8 +1,8 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import JournalEntry, Tag, Mood, CalendarView
-from .serializers import JournalEntrySerializer, TagSerializer, MoodSerializer, CalendarViewSerializer
+from .models import JournalEntry, Tag, Mood, CalendarView, EntryTag
+from .serializers import JournalEntrySerializer, TagSerializer, MoodSerializer, CalendarViewSerializer, EntryTagSerializer
 
 class JournalEntryViewSet(viewsets.ModelViewSet):
     queryset = JournalEntry.objects.all()
@@ -18,6 +18,14 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
+class EntryTagViewSet(viewsets.ModelViewSet):
+    queryset = EntryTag.objects.all()
+    serializer_class = EntryTagSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):

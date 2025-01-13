@@ -7,6 +7,12 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ['id', 'name']
 
+
+class EntryTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EntryTag
+        fields = '__all__'
+
 class MoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mood
