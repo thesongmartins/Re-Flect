@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Logout from "../../components/LogOut";
 import { useNavigate } from "react-router-dom";
 import Setting from "../../components/Dashboard/Setting";
@@ -12,7 +12,7 @@ import {
   Moon,
   Sticker,
   Sun,
-  Trash,
+  // Trash,
   X,
   Menu,
 } from "lucide-react";
@@ -23,19 +23,19 @@ const ReflectApp = () => {
   const [activeSection, setActiveSection] = useState("Notes");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [moodLog, setMoodLog] = useState([]);
+  // const [moodLog, setMoodLog] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isloggedOut, setIsloggedOut] = useState(false);
 
-  useEffect(() => {
-    const savedMoodLog = localStorage.getItem("moodLog");
-    const savedTheme = localStorage.getItem("theme");
+  // useEffect(() => {
+  //   const savedMoodLog = localStorage.getItem("moodLog");
+  //   const savedTheme = localStorage.getItem("theme");
 
-    if (savedMoodLog) setMoodLog(JSON.parse(savedMoodLog));
-    if (savedTheme === "dark") setIsDarkMode(true);
-  }, []);
+  //   if (savedMoodLog) setMoodLog(JSON.parse(savedMoodLog));
+  //   if (savedTheme === "dark") setIsDarkMode(true);
+  // }, []);
 
   const menuItems = [
     { name: "Notes", icon: <FileEdit className="w-5 h-5" /> },
@@ -44,31 +44,31 @@ const ReflectApp = () => {
     { name: "Settings", icon: <Settings className="w-5 h-5" /> },
   ];
 
-  const moodOptions = [
-    { type: "happy", emoji: "😊" },
-    { type: "sad", emoji: "😢" },
-    { type: "neutral", emoji: "😐" },
-    { type: "excited", emoji: "🎉" },
-    { type: "tired", emoji: "😴" },
-  ];
+  // const moodOptions = [
+  //   { type: "happy", emoji: "😊" },
+  //   { type: "sad", emoji: "😢" },
+  //   { type: "neutral", emoji: "😐" },
+  //   { type: "excited", emoji: "🎉" },
+  //   { type: "tired", emoji: "😴" },
+  // ];
 
-  const handleLogMood = (type) => {
-    const newMood = {
-      id: Date.now().toString(),
-      type,
-      timestamp: new Date().toISOString(),
-    };
-    setMoodLog((prev) => [...prev, newMood]);
-  };
+  // const handleLogMood = (type) => {
+  //   const newMood = {
+  //     id: Date.now().toString(),
+  //     type,
+  //     timestamp: new Date().toISOString(),
+  //   };
+  //   setMoodLog((prev) => [...prev, newMood]);
+  // };
 
-  const handleDeleteMood = (moodId) => {
-    setMoodLog((prev) => prev.filter((mood) => mood.id !== moodId));
-  };
+  // const handleDeleteMood = (moodId) => {
+  //   setMoodLog((prev) => prev.filter((mood) => mood.id !== moodId));
+  // };
 
   const handleSignOut = () => {
     localStorage.clear();
     // setNotes([]);
-    setMoodLog([]);
+    // setMoodLog([]);
     setSearchQuery("");
     setActiveSection("Notes");
     navigate("/login");
@@ -193,7 +193,7 @@ const ReflectApp = () => {
             </div>
           )}
 
-          {activeSection === "Log Mood" && (
+          {/* {activeSection === "Log Mood" && (
             <div className="flex-1 p-4 lg:p-6">
               <h2 className="text-xl font-semibold mb-6">
                 How are you feeling today?
@@ -248,7 +248,7 @@ const ReflectApp = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {activeSection === "Analytics" && (
             <div className="flex-1 p-4 lg:p-6">

@@ -30,6 +30,10 @@ function Notes() {
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
   const [text, setText] = useState("");
 
+  const handleDeleteMood = (moodId) => {
+    setMoodLog((prev) => prev.filter((mood) => mood.id !== moodId));
+  };
+
   const handleCreateNote = async () => {
     try {
       setIsLoading(true);
@@ -119,6 +123,38 @@ function Notes() {
             ))}
           </div>
         </div>
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold mb-4">Recent Mood History</h3>
+          <div className="space-y-2">
+            {moodLog
+              .slice(-5)
+              .reverse()
+              .map((mood) => (
+                <div
+                  key={mood.id}
+                  className={`p-3 rounded-lg flex justify-between items-center group ${
+                    isDarkMode ? "bg-gray-800" : "bg-gray-50"
+                  }`}
+                >
+                  <span>
+                    {moodOptions.find((m) => m.type === mood.type)?.emoji}
+                  </span>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-xs sm:text-sm text-gray-500">
+                      {new Date(mood.timestamp).toLocaleString()}
+                    </span>
+                    <button
+                      onClick={() => handleDeleteMood(mood.id)}
+                      className="text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+                    >
+                      <Trash className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+
         {isNewNoteOpen ? (
           <div
             className={`p-4 lg:p-6 rounded-lg ${
