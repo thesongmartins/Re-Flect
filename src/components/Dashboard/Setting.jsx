@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  Upload,
+  // Upload,
   User,
   Bell,
   HelpCircle,
@@ -28,16 +28,16 @@ const Setting = () => {
     document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        // handle the uploaded file
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleFileUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       // handle the uploaded file
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
   // Profile state
   const [profile, setProfile] = useState({
     name: "",
@@ -397,7 +397,7 @@ const Setting = () => {
 
             {sections[activeSection]}
           </div>
-          <div className="mt-3">
+          {/* <div className="mt-3">
             <h2 className="text-2xl font-semibold mb-8">Appearances</h2>
 
             <div className="mb-8">
@@ -498,7 +498,7 @@ const Setting = () => {
                 </span>
               </label>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
