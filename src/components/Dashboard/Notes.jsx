@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FileEdit, Trash, Loader, Save, Plus } from "lucide-react";
+import { Editor } from "primereact/editor";
 
 const API_URL = "https://api.example.com/notes"; // Replace with your actual API URL
 
@@ -27,6 +28,7 @@ function Notes() {
   const [error, setError] = useState("");
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
+  const [text, setText] = useState("");
 
   const handleCreateNote = async () => {
     try {
@@ -134,19 +136,13 @@ function Notes() {
                 setNewNote((prev) => ({ ...prev, title: e.target.value }))
               }
             />
-            <textarea
-              placeholder="Note Content"
-              className={`w-full mb-4 p-2 h-32 rounded ${
-                isDarkMode ? "bg-transparent" : "bg-transparent"
-              }`}
-              value={newNote.content}
-              onChange={(e) =>
-                setNewNote((prev) => ({
-                  ...prev,
-                  content: e.target.value,
-                }))
-              }
-            />
+            <div className="card">
+              <Editor
+                value={text}
+                onTextChange={(e) => setText(e.htmlValue)}
+                style={{ height: "320px" }}
+              />
+            </div>
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setIsNewNoteOpen(false)}
