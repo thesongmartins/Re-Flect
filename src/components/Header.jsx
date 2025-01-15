@@ -5,9 +5,9 @@ import { IoIosNotifications } from "react-icons/io";
 const Header = () => {
   return (
     <>
-      <header className="bg-white flex justify-between items-center p-5">
+      <header className=" bg-white flex justify-between items-center  p-5">
         <p className="ml-20 font-bold text-xl">Re-flect</p>
-        <nav className="max-lg:hidden"> 
+        <nav className="max-lg:hidden">
           <ul className="flex gap-7 md:gap-5 mr-20 items-center max-lg:hidden">
             <li>
               <a href="#">About</a>
