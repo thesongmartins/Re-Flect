@@ -10,7 +10,7 @@ import {
   Settings,
   LogOut,
   Moon,
-  Sticker,
+  // Sticker,
   Sun,
   // Trash,
   X,
@@ -39,7 +39,7 @@ const ReflectApp = () => {
 
   const menuItems = [
     { name: "Notes", icon: <FileEdit className="w-5 h-5" /> },
-    { name: "Log Mood", icon: <Sticker className="w-5 h-5" /> },
+    // { name: "Log Mood", icon: <Sticker className="w-5 h-5" /> },
     { name: "Analytics", icon: <PieChart className="w-5 h-5" /> },
     { name: "Settings", icon: <Settings className="w-5 h-5" /> },
   ];
