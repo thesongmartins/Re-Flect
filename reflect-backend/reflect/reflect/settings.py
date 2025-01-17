@@ -29,7 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'potential-space-goggles-6jwrpxjw9xjcrpvv-8000.app.github.dev',
     '127.0.0.1',
-    'localhost'
+    'localhost',
+    'https://re-flect.onrender.com'
 ]
 
 
