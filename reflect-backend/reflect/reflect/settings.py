@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "users",
     "journal",
+    "contact",
     "corsheaders",
     "drf_yasg",
 ]
@@ -84,6 +85,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "reflect.wsgi.application"
+
+# Email settings for email notifications
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Or your email host
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your-email-password'  # Use environment variable in production
+DEFAULT_FROM_EMAIL = 'your-email@gmail.com'
+ADMIN_EMAIL = 'admin-email@gmail.com'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
