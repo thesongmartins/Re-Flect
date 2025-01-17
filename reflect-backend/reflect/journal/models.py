@@ -42,7 +42,7 @@ class Mood(models.Model):
         (2, "Moderately"),
         (3, "Very"),
         (4, "Extremely")
-    ])
+    ], blank=True, null=True)
     notes = models.TextField(blank=True, null=True)  # Optional notes about the mood
     timestamp = models.DateTimeField(auto_now_add=True)
 
