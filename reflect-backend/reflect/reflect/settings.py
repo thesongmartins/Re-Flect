@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-&bfn8_&$93$&!4rt+enm&4niahhr9q&49os*zwif2t#5t-b99g
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://re-flect.onrender.com',
+    're-flect.onrender.com',
     'potential-space-goggles-6jwrpxjw9xjcrpvv-8000.app.github.dev',
     '127.0.0.1',
     'localhost'
