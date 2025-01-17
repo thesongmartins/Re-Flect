@@ -26,7 +26,7 @@ from drf_yasg import openapi
 
 
 def root_view(request):
-    return JsonResponse({"message": "Welcome to the Re-Flect API!"})
+    return JsonResponse({"message": f"Welcome to the Re-Flect API!"})
 
 schema_view = get_schema_view(
     openapi.Info(
