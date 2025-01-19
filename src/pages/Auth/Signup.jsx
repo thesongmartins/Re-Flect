@@ -2,11 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLoadingStore from "../../store/loadingstore";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react"; // Add this import
+
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [err, setErr] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Add this state
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Add this state
   const { start, stop } = useLoadingStore();
   const navigate = useNavigate();
 
@@ -23,6 +27,14 @@ const Signup = () => {
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     setErr("");
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const handleSubmit = (e) => {
@@ -43,6 +55,7 @@ const Signup = () => {
       stop();
     }, 2000);
   };
+
   return (
     <>
       <div className="bg-gray-100 flex flex-col items-center justify-center min-h-screen py-2">
@@ -75,14 +88,27 @@ const Signup = () => {
               >
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                onChange={handlePasswordChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="********"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  onChange={handlePasswordChange}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+                  placeholder="********"
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5 text-gray-500" />
+                  ) : (
+                    <Eye className="h-5 w-5 text-gray-500" />
+                  )}
+                </button>
+              </div>
             </div>
             <div className="mb-6">
               <label
@@ -91,18 +117,31 @@ const Signup = () => {
               >
                 Confirm Password
               </label>
-              <input
-                type="password"
-                id="confirm-password"
-                onChange={handleConfirmPasswordChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="********"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirm-password"
+                  onChange={handleConfirmPasswordChange}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+                  placeholder="********"
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff className="h-5 w-5 text-gray-500" />
+                  ) : (
+                    <Eye className="h-5 w-5 text-gray-500" />
+                  )}
+                </button>
+              </div>
             </div>
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg ```javascript bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 Sign Up
               </button>
