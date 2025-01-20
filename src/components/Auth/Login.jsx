@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLoadingStore from "../../store/loadingstore";
+import authStore from "../../store/authStore";
 import { useNavigate } from "react-router";
 import { Eye, EyeOff } from "lucide-react"; // Add this import
 
