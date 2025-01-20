@@ -6,14 +6,18 @@ import { Eye, EyeOff } from "lucide-react";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState(""); // State for username
+  const [username, setUsername] = useState(""); // Added username state
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [err, setErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState(""); // To display password errors
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { start, stop } = useLoadingStore();
   const navigate = useNavigate();
+
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -26,8 +30,17 @@ const Signup = () => {
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const value = e.target.value;
+    setPassword(value);
     setErr("");
+
+    if (!passwordRegex.test(value)) {
+      setPasswordErr(
+        "Password must be at least 8 characters,\n include an uppercase letter, \n a lowercase letter, a number, and a symbol."
+      );
+    } else {
+      setPasswordErr(""); // Clear error if password is valid
+    }
   };
 
   const handleConfirmPasswordChange = (e) => {
@@ -46,10 +59,16 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!passwordRegex.test(password)) {
+      setErr("Password does not meet the requirements.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setErr("Password must match confirm password.");
       return;
     }
+
     start();
     console.log("Email:", email);
     console.log("Username:", username);
@@ -99,7 +118,7 @@ const Signup = () => {
                 value={username}
                 onChange={handleUsernameChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Choose a username"
+                placeholder="Enter your username"
                 required
               />
             </div>
@@ -114,6 +133,7 @@ const Signup = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
+                  value={password}
                   onChange={handlePasswordChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
                   placeholder="********"
@@ -131,6 +151,7 @@ const Signup = () => {
                   )}
                 </button>
               </div>
+              <p className="text-red-600 text-xs mt-1 whitespace-pre-line">{passwordErr}</p>
             </div>
             <div className="mb-6">
               <label
@@ -143,6 +164,7 @@ const Signup = () => {
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   id="confirm-password"
+                  value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
                   placeholder="********"
@@ -168,7 +190,7 @@ const Signup = () => {
                 Sign Up
               </button>
             </div>
-            <p className="text-red-600 text-xs text-center font-semibold">
+            <p className="text-red-600 text-xs text-center font-semibold mt-4">
               {err}
             </p>
 
