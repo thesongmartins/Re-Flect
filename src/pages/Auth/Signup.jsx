@@ -2,20 +2,26 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLoadingStore from "../../store/loadingstore";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react"; // Add this import
+import { Eye, EyeOff } from "lucide-react";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); // State for username
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [err, setErr] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Add this state
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Add this state
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { start, stop } = useLoadingStore();
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setErr("");
+  };
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
     setErr("");
   };
 
@@ -45,9 +51,8 @@ const Signup = () => {
       return;
     }
     start();
-    // Here you would handle form submission,
-    // e.g., sending data to an API, validating input, etc.
     console.log("Email:", email);
+    console.log("Username:", username);
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPassword);
     setTimeout(() => {
@@ -77,7 +82,24 @@ const Signup = () => {
                 value={email}
                 onChange={handleEmailChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Sign Up"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="username"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={handleUsernameChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Choose a username"
                 required
               />
             </div>
