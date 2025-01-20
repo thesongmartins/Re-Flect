@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import useLoadingStore from "../../store/loadingstore";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState(""); // Added username state
+  const [username, setUsername] = useState(""); 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [err, setErr] = useState("");
-  const [passwordErr, setPasswordErr] = useState(""); // To display password errors
+  const [passwordErr, setPasswordErr] = useState(""); 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { start, stop } = useLoadingStore();
@@ -39,7 +41,7 @@ const Signup = () => {
         "Password must be at least 8 characters,\n include an uppercase letter, \n a lowercase letter, a number, and a symbol."
       );
     } else {
-      setPasswordErr(""); // Clear error if password is valid
+      setPasswordErr(""); 
     }
   };
 
@@ -56,7 +58,7 @@ const Signup = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!passwordRegex.test(password)) {
@@ -70,14 +72,24 @@ const Signup = () => {
     }
 
     start();
-    console.log("Email:", email);
-    console.log("Username:", username);
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
-    setTimeout(() => {
-      navigate("/dashboard");
+
+    try {
+      const response = await axios.post(
+        "https://re-flect.onrender.com/api/users/register/",
+        { username, email, password }
+      );
+
+      if (response.status === 201) {
+        toast.success("Registration successful! Redirecting to login...");
+        navigate("/login");
+      }
+    } catch (error) {
+      setErr(
+        error.response?.data?.message || "Something went wrong. Please try again."
+      );
+    } finally {
       stop();
-    }, 2000);
+    }
   };
 
   return (
