@@ -8,11 +8,11 @@ import toast from "react-hot-toast";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState(""); 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [err, setErr] = useState("");
-  const [passwordErr, setPasswordErr] = useState(""); 
+  const [passwordErr, setPasswordErr] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { start, stop } = useLoadingStore();
@@ -41,7 +41,7 @@ const Signup = () => {
         "Password must be at least 8 characters,\n include an uppercase letter, \n a lowercase letter, a number, and a symbol."
       );
     } else {
-      setPasswordErr(""); 
+      setPasswordErr("");
     }
   };
 
@@ -85,7 +85,8 @@ const Signup = () => {
       }
     } catch (error) {
       setErr(
-        error.response?.data?.message || "Something went wrong. Please try again."
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
       );
     } finally {
       stop();
@@ -148,7 +149,7 @@ const Signup = () => {
                   value={password}
                   onChange={handlePasswordChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
-                  placeholder="********"
+                  placeholder="Enter Password"
                   required
                 />
                 <button
@@ -163,7 +164,9 @@ const Signup = () => {
                   )}
                 </button>
               </div>
-              <p className="text-red-600 text-xs mt-1 whitespace-pre-line">{passwordErr}</p>
+              <p className="text-red-600 text-xs mt-1 whitespace-pre-line">
+                {passwordErr}
+              </p>
             </div>
             <div className="mb-6">
               <label
@@ -179,7 +182,7 @@ const Signup = () => {
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
-                  placeholder="********"
+                  placeholder="Confirm password"
                 />
                 <button
                   type="button"
