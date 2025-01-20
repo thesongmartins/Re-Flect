@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLoadingStore from "../../store/loadingstore";
-import authStore from "../../store/authStore";
+import useAuthStore from "../../store/authStore";
 import { useNavigate } from "react-router";
-import { Eye, EyeOff } from "lucide-react"; // Add this import
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // Add this state
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const { start, stop } = useLoadingStore();
+  const { setAuthData } = useAuthStore();
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -26,21 +28,54 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    start();
-    // Handle form submission here
+    if (!email || !password) {
+      setErrorMessage("Email and password are required.");
+      return;
+    }
+    if (passwordError) {
+      setErrorMessage("Password must contain at least one uppercase letter.");
+      return;
+    }
 
-    setTimeout(() => {
-      navigate("/dashboard");
+    start();
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(
+        "https://re-flect.onrender.com/api/users/login/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setAuthData(data.user, { access: data.access, refresh: data.refresh });
+        navigate("/dashboard");
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.detail || "Failed to log in.");
+      }
+    } catch (error) {
+      setErrorMessage("An error occurred. Please try again.");
+    } finally {
       stop();
-    }, 2000);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 className="text-2xl font-bold mb-4">Welcome Back!</h2>
+        {errorMessage && (
+          <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
