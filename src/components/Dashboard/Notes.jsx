@@ -140,11 +140,11 @@ function Notes() {
 
         {/* Render Notes */}
         {isNewNoteOpen ? (
-          <div className="p-4 lg:p-6 rounded-lg">
+          <div className="p-4  lg:p-6 rounded-lg">
             <input
               type="text"
               placeholder="Note Title"
-              className="w-full mb-4 p-2 rounded"
+              className="w-full border mb-4 p-2 rounded"
               value={newNote.title}
               onChange={(e) =>
                 setNewNote((prev) => ({ ...prev, title: e.target.value }))
@@ -164,7 +164,7 @@ function Notes() {
             )}
             <div
               onClick={() => setShowEmoji(!showEmoji)}
-              className="fixed cursor-pointer bottom-14 right-4 bg-white rounded-full p-4 text-xl"
+              className="fixed cursor-pointer bottom-[80px]  md:bottom-[100px] md:right-[100px] bg-white rounded-full p-4 text-xl"
             >
               😊
             </div>
