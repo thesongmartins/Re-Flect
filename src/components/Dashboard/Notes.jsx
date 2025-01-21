@@ -11,6 +11,7 @@ const API_URL = "https://re-flect.onrender.com/api/journal/entries/";
 
 function Notes() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showEmoji, setShowEmoji] = useState(false);
   const [moodLog, setMoodLog] = useState([]);
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
@@ -155,9 +156,17 @@ function Notes() {
                 onTextChange={(e) => setText(e.htmlValue)}
                 style={{ height: "320px" }}
               />
+            </div>
+            {showEmoji && (
               <div>
                 <EmojiPicker />
               </div>
+            )}
+            <div
+              onClick={() => setShowEmoji(!showEmoji)}
+              className="fixed cursor-pointer bottom-14 right-4 bg-white rounded-full p-4 text-xl"
+            >
+              😊
             </div>
             <div className="flex justify-end space-x-2 pt-4">
               <button
