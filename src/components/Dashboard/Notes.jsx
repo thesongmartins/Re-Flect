@@ -74,7 +74,7 @@ function Notes() {
           Authorization: `Bearer ${token}`,
         },
       });
-      deleteNote(noteId); // Remove the note from the store after deletion
+      deleteNote(noteId);
     } catch (err) {
       console.error(err);
       setError("Failed to delete note. Please try again.");
@@ -84,7 +84,7 @@ function Notes() {
   };
 
   useEffect(() => {
-    fetchNotes(); // Fetch notes when component mounts
+    fetchNotes(); 
   }, []);
 
   return (
