@@ -5,6 +5,7 @@ import axios from "axios";
 import useAuthStore from "../../store/authStore"; // Assuming auth store is already set up
 import useNoteStore from "../../store/noteStore"; // Import the note store
 import useThemeStore from "../../store/themeStore";
+import EmojiPicker from "emoji-picker-react";
 
 const API_URL = "https://re-flect.onrender.com/api/journal/entries/";
 
@@ -154,6 +155,9 @@ function Notes() {
                 onTextChange={(e) => setText(e.htmlValue)}
                 style={{ height: "320px" }}
               />
+              <div>
+                <EmojiPicker />
+              </div>
             </div>
             <div className="flex justify-end space-x-2 pt-4">
               <button
