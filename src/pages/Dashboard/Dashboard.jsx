@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Setting from "../../components/Dashboard/Setting";
 import Analytics from "../../components/Dashboard/Analytics";
 import useThemeStore from "../../store/themeStore";
-import EmojiPicker from "emoji-picker-react";
 import {
   Search,
   FileEdit,
