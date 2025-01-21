@@ -10,8 +10,9 @@ import EmojiPicker from "emoji-picker-react";
 const API_URL = "https://re-flect.onrender.com/api/journal/entries/";
 
 function Notes() {
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [moodLog, setMoodLog] = useState([]);
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
