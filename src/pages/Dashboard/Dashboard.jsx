@@ -3,6 +3,7 @@ import Logout from "../../components/LogOut";
 import { useNavigate } from "react-router-dom";
 import Setting from "../../components/Dashboard/Setting";
 import Analytics from "../../components/Dashboard/Analytics";
+import useThemeStore from "../../store/themeStore";
 import {
   Search,
   FileEdit,
@@ -23,8 +24,8 @@ const ReflectApp = () => {
   const [activeSection, setActiveSection] = useState("Notes");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // const [moodLog, setMoodLog] = useState([]);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, setDarkMode } = useThemeStore();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isloggedOut, setIsloggedOut] = useState(false);
@@ -51,15 +52,6 @@ const ReflectApp = () => {
   //   { type: "excited", emoji: "🎉" },
   //   { type: "tired", emoji: "😴" },
   // ];
-
-  // const handleLogMood = (type) => {
-  //   const newMood = {
-  //     id: Date.now().toString(),
-  //     type,
-  //     timestamp: new Date().toISOString(),
-  //   };
-  //   setMoodLog((prev) => [...prev, newMood]);
-  // };
 
   // const handleDeleteMood = (moodId) => {
   //   setMoodLog((prev) => prev.filter((mood) => mood.id !== moodId));
@@ -117,7 +109,7 @@ const ReflectApp = () => {
           <div className="mb-8 flex justify-between items-center">
             <h1 className="text-2xl font-bold hidden lg:block">Re-flect</h1>
             <button
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              onClick={() => setDarkMode(!isDarkMode)}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               {isDarkMode ? (
