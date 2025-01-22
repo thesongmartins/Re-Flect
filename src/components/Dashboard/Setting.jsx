@@ -10,7 +10,10 @@ import {
   Phone,
   MessageSquare,
   Shield,
+  Lock,
+  Camera
 } from "lucide-react";
+
 
 const Setting = () => {
   useEffect(() => {
@@ -138,7 +141,7 @@ const Setting = () => {
                 : "bg-white hover:bg-gray-50"
             }`}
           >
-            <span className={isDarkMode ? "text-gray-300" : "text-gray-600"}>
+            <span className={isDarkMode ? "text-gray-100" : "text-gray-800"}>
               {title}
             </span>
             <Icon
@@ -152,10 +155,10 @@ const Setting = () => {
     ),
 
     profile: (
-      <form onSubmit={handleProfileUpdate} className="space-y-6 text-white">
+      <form onSubmit={handleProfileUpdate} className="space-y-6">
         {/* Avatar Upload */}
         <div className="flex items-center space-x-4 mb-6">
-          <div className="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center">
+          <div className="w-20 h-20 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
             {profile.avatar ? (
               <img 
                 src={profile.avatar} 
@@ -188,55 +191,55 @@ const Setting = () => {
     
         {/* Form Fields */}
         <div>
-          <label className="block text-white mb-2">Full Name</label>
+          <label className="block mb-2 text-gray-900 dark:text-gray-200">Full Name</label>
           <input
             type="text"
             value={profile.name}
             onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            className="w-full p-2 rounded border bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
             placeholder="Enter your full name"
           />
         </div>
     
         <div>
-          <label className="block text-white mb-2">Email Address</label>
+          <label className="block mb-2 text-gray-900 dark:text-gray-200">Email Address</label>
           <input
             type="email"
             value={profile.email}
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            className="w-full p-2 rounded border bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
             placeholder="Enter your email"
           />
         </div>
     
         <div>
-          <label className="block text-white mb-2">Phone Number</label>
+          <label className="block mb-2 text-gray-900 dark:text-gray-200">Phone Number</label>
           <input
             type="tel"
             value={profile.phone}
             onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            className="w-full p-2 rounded border bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
             placeholder="Enter your phone number"
           />
         </div>
     
         <div>
-          <label className="block text-white mb-2">Bio</label>
+          <label className="block mb-2 text-gray-900 dark:text-gray-200">Bio</label>
           <textarea
             value={profile.bio}
             onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            className="w-full p-2 rounded border bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
             placeholder="Write a short bio about yourself"
             rows="3"
           />
         </div>
     
         <div>
-          <label className="block text-white mb-2">Profile Privacy</label>
+          <label className="block mb-2 text-gray-900 dark:text-gray-200">Profile Privacy</label>
           <select
             value={profile.privacy}
             onChange={(e) => setProfile({ ...profile, privacy: e.target.value })}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            className="w-full p-2 rounded border bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
           >
             <option value="public">Public</option>
             <option value="private">Private</option>
@@ -246,12 +249,12 @@ const Setting = () => {
     
         {/* Success Message */}
         {success && (
-          <div className="text-green-400 text-sm">Profile updated successfully!</div>
+          <div className="text-green-500 dark:text-green-400 text-sm">Profile updated successfully!</div>
         )}
     
         {/* Error Message */}
         {error && (
-          <div className="text-red-400 text-sm">{error}</div>
+          <div className="text-red-500 dark:text-red-400 text-sm">{error}</div>
         )}
     
         {/* Buttons */}
@@ -265,7 +268,7 @@ const Setting = () => {
           <button
             type="button"
             onClick={() => setActiveSection("main")}
-            className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
+            className="bg-gray-500 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-700 text-white px-4 py-2 rounded"
           >
             Cancel
           </button>
@@ -277,7 +280,7 @@ const Setting = () => {
       <div className="space-y-6 p-4 ">
         {/* Font Size Section */}
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-3 text-black">Font Size</h3>
+          <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? "text-gray-200" : "text-gray-800"}`}>Font Size</h3>
           <div className="grid grid-cols-3 gap-3">
             {['Small', 'Default', 'Large'].map((size) => (
               <button
@@ -297,7 +300,7 @@ const Setting = () => {
     
         {/* Font Style Section */}
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-3 text-black">Font Style</h3>
+          <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? "text-gray-200" : "text-gray-800"}`}>Font Style</h3>
           <select
             value={fontStyle}
             onChange={(e) => setFontStyle(e.target.value)}
@@ -311,7 +314,7 @@ const Setting = () => {
     
         {/* Theme Section */}
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-3 text-black">Theme</h3>
+          <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? "text-gray-200" : "text-gray-800"}`}>Theme</h3>
           <div className="flex gap-4">
             <button
               onClick={() => handleThemeChange('light')}
@@ -349,8 +352,8 @@ const Setting = () => {
     ),
 
     notification: (
-      <div className="space-y-6 p-4 bg-gray-800 rounded-lg">
-        <h2 className="text-xl font-semibold text-white mb-6">Notification Preferences</h2>
+      <div className="space-y-6 p-4 rounded-lg bg-white dark:bg-gray-800">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Notification Preferences</h2>
         
         {[
           { 
@@ -378,14 +381,14 @@ const Setting = () => {
             description: "Get notified when someone comments on your posts"
           },
         ].map(({ key, label, icon: Icon, description }) => (
-          <div key={key} className="flex items-center justify-between p-4 bg-gray-700 rounded-lg">
+          <div key={key} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="flex items-center space-x-4">
-              <div className="p-2 bg-gray-600 rounded-lg">
-                <Icon className="w-5 h-5 text-blue-400" />
+              <div className="p-2 bg-gray-100 dark:bg-gray-600 rounded-lg">
+                <Icon className="w-5 h-5 text-blue-500 dark:text-blue-400" />
               </div>
               <div>
-                <h3 className="text-white font-medium">{label}</h3>
-                <p className="text-gray-400 text-sm">{description}</p>
+                <h3 className="text-gray-900 dark:text-gray-200">{label}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{description}</p>
               </div>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -400,7 +403,7 @@ const Setting = () => {
                 }
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-600 rounded-full peer 
+              <div className="w-11 h-6 bg-gray-200 dark:bg-gray-600 rounded-full peer 
                             peer-checked:bg-blue-500 
                             after:content-[''] 
                             after:absolute 
@@ -426,65 +429,101 @@ const Setting = () => {
           </button>
           <button
             onClick={() => setActiveSection("main")}
-            className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors duration-200"
+            className="bg-gray-500 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors duration-200"
           >
             Cancel
           </button>
         </div>
       </div>
     ),
-
+    
     help: (
       <div className="space-y-6">
-        {[
-          {
-            title: "FAQs",
-            icon: HelpCircle,
-            content: "Frequently asked questions about using the app",
-          },
-          {
-            title: "Contact Support",
-            icon: Mail,
-            content: "Get in touch with our support team",
-          },
-          {
-            title: "Privacy Policy",
-            icon: Shield,
-            content: "Read our privacy policy",
-          },
-          {
-            title: "Terms of Service",
-            icon: Lock,
-            content: "View our terms of service",
-          },
-        ].map(({ title, icon: Icon, content }) => (
-          <div
-            key={title}
-            className={`p-4 rounded-lg ${
-              isDarkMode ? "bg-gray-800" : "bg-white"
-            } shadow`}
-          >
-            <div className="flex items-center mb-2">
-              <Icon className="w-5 h-5 mr-2" />
-              <h3 className="font-semibold">{title}</h3>
-            </div>
-            <p
-              className={`text-sm ${
-                isDarkMode ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              {content}
-            </p>
+        {/* FAQ Section */}
+        <div className={`p-6 rounded-lg ${isDarkMode ? "bg-gray-800" : "bg-white"} shadow-lg`}>
+          <div className="flex items-center mb-4">
+            <HelpCircle className="w-6 h-6 mr-3 text-blue-500" />
+            <h3 className={`text-xl font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+              Frequently Asked Questions
+            </h3>
           </div>
-        ))}
+          <div className="space-y-4">
+            <details className="group">
+              <summary className={`flex items-center justify-between cursor-pointer ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+                <span className="font-medium">How do I reset my password?</span>
+                <ChevronRight className="w-5 h-5 transition-transform group-open:rotate-90" />
+              </summary>
+              <p className={`mt-2 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+                Go to the login page and click on "Forgot Password". Follow the instructions sent to your email to reset your password.
+              </p>
+            </details>
+            <details className="group">
+              <summary className={`flex items-center justify-between cursor-pointer ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+                <span className="font-medium">How can I update my profile?</span>
+                <ChevronRight className="w-5 h-5 transition-transform group-open:rotate-90" />
+              </summary>
+              <p className={`mt-2 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+                Navigate to Settings > Edit Profile. Here you can update your personal information, photo, and preferences.
+              </p>
+            </details>
+          </div>
+        </div>
+    
+        {/* Contact Support Section */}
+        <div className={`p-6 rounded-lg ${isDarkMode ? "bg-gray-800" : "bg-white"} shadow-lg`}>
+          <div className="flex items-center mb-4">
+            <Mail className="w-6 h-6 mr-3 text-blue-500" />
+            <h3 className={`text-xl font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+              Contact Support
+            </h3>
+          </div>
+          <div className="space-y-4">
+            <div className="flex items-center">
+              <Mail className="w-5 h-5 mr-3 text-gray-400" />
+              <p className={isDarkMode ? "text-white" : "text-gray-900"}>support@gmail.com</p>
+            </div>
+            <div className="flex items-center">
+              <Phone className="w-5 h-5 mr-3 text-gray-400" />
+              <p className={isDarkMode ? "text-white" : "text-gray-900"}>+234 8094 356 278</p>
+            </div>
+          </div>
+        </div>
+    
+        {/* Legal Section */}
+        <div className={`p-6 rounded-lg ${isDarkMode ? "bg-gray-800" : "bg-white"} shadow-lg`}>
+          <div className="flex items-center mb-4">
+            <Shield className="w-6 h-6 mr-3 text-blue-500" />
+            <h3 className={`text-xl font-semibold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+              Legal
+            </h3>
+          </div>
+          <div className="space-y-4">
+            <button 
+              onClick={() => window.open('/privacy', '_blank')}
+              className={`flex items-center w-full text-left hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded ${isDarkMode ? "text-white" : "text-gray-900"}`}
+            >
+              <Shield className="w-5 h-5 mr-3 text-gray-400" />
+              <span>Privacy Policy</span>
+            </button>
+            <button 
+              onClick={() => window.open('/terms', '_blank')}
+              className={`flex items-center w-full text-left hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded ${isDarkMode ? "text-white" : "text-gray-900"}`}
+            >
+              <Lock className="w-5 h-5 mr-3 text-gray-400" />
+              <span>Terms of Service</span>
+            </button>
+          </div>
+        </div>
+    
+        {/* Back Button */}
         <button
           onClick={() => setActiveSection("main")}
-          className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+          className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
         >
-          Back
+          Back to Settings
         </button>
       </div>
-    ),
+    )
   };
   return (
     <div
@@ -516,7 +555,7 @@ const Setting = () => {
                 {activeSection === "main"
                   ? "Settings"
                   : activeSection.charAt(0).toUpperCase() +
-                    activeSection.slice(1)}
+                  activeSection.slice(1)}
               </h1>
             </div>
 
