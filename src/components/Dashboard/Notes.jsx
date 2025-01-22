@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FileEdit, Trash, Loader, Save, Plus, X } from "lucide-react";
+import { FileEdit, Trash, Loader, Save, Plus, X, Edit } from "lucide-react";
 import { Editor } from "primereact/editor";
 import axios from "axios";
 import useAuthStore from "../../store/authStore";
@@ -27,6 +27,7 @@ function Notes() {
     setError,
     addNote,
     deleteNote,
+    updateNote, // New method to update notes
   } = useNoteStore();
   
   const { getAccessToken } = useAuthStore();
@@ -39,7 +40,6 @@ function Notes() {
     { type: "tired", emoji: "😴" },
   ];
 
-  // Extract first emoji from content
   const extractFirstEmoji = (content) => {
     const emojiRegex = /[\p{Emoji}]/u;
     const match = content.match(emojiRegex);
@@ -92,6 +92,38 @@ function Notes() {
     } catch (err) {
       console.error(err);
       setError("Failed to create note. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEditNote = async () => {
+    try {
+      setLoading(true);
+      const token = getAccessToken();
+      
+      const requestBody = {
+        title: newNote.title,
+        content: text, // This will include HTML tags from the Editor
+      };
+
+      const authorizedAxios = axios.create({
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const response = await authorizedAxios.put(
+        `${API_URL}${selectedNote.id}`,
+        requestBody
+      );
+      updateNote(response.data); // Update the note in the state
+      setSelectedNote(null);
+      setIsNewNoteOpen(false);
+      setText("");
+      setNewNote({ title: "", content: "", mood: "" });
+    } catch (err) {
+      console.error(err);
+      setError("Failed to update note. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -194,7 +226,7 @@ function Notes() {
                 Cancel
               </button>
               <button
-                onClick={handleCreateNote}
+                onClick={selectedNote ? handleEditNote : handleCreateNote}
                 disabled={isLoading}
                 className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 flex items-center"
               >
@@ -203,7 +235,7 @@ function Notes() {
                 ) : (
                   <Save className="w-4 h-4 mr-2" />
                 )}
-                Save Note
+                {selectedNote ? "Save Changes" : "Save Note"}
               </button>
             </div>
           </div>
@@ -234,6 +266,21 @@ function Notes() {
                         {extractFirstEmoji(note.content)}
                       </span>
                     )}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedNote(note);
+                        setNewNote({
+                          title: note.title,
+                          content: note.content,
+                        });
+                        setText(note.content);
+                        setIsNewNoteOpen(true);
+                      }}
+                      className="absolute top-2 right-8 p-2 text-blue-500 hover:text-blue-700"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
               ))
@@ -242,7 +289,6 @@ function Notes() {
         )}
       </div>
 
-      {/* Note Detail Modal */}
       {selectedNote && (
         <div className=" inset-0 bg-transparent bg-opacity-50 flex items-center justify-center p-4">
           <div className=" rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
@@ -263,7 +309,7 @@ function Notes() {
         </div>
       )}
 
-      {/* Floating Action Button */}
+      {/* FAB */}
       {!isNewNoteOpen && (
         <button
           onClick={() => setIsNewNoteOpen(true)}
