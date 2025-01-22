@@ -349,21 +349,44 @@ const Setting = () => {
     ),
 
     notification: (
-      <div className="space-y-6">
+      <div className="space-y-6 p-4 bg-gray-800 rounded-lg">
+        <h2 className="text-xl font-semibold text-white mb-6">Notification Preferences</h2>
+        
         {[
-          { key: "email", label: "Email Notifications", icon: Mail },
-          { key: "push", label: "Push Notifications", icon: Bell },
-          { key: "sms", label: "SMS Notifications", icon: Phone },
+          { 
+            key: "email", 
+            label: "Email Notifications", 
+            icon: Mail,
+            description: "Receive updates and alerts via email"
+          },
+          { 
+            key: "push", 
+            label: "Push Notifications", 
+            icon: Bell,
+            description: "Get instant notifications on your device"
+          },
+          { 
+            key: "sms", 
+            label: "SMS Notifications", 
+            icon: Phone,
+            description: "Receive important alerts via text message"
+          },
           {
             key: "comments",
             label: "Comment Notifications",
             icon: MessageSquare,
+            description: "Get notified when someone comments on your posts"
           },
-        ].map(({ key, label, icon: Icon }) => (
-          <div key={key} className="flex items-center justify-between">
-            <div className="flex items-center">
-              <Icon className="w-5 h-5 mr-3" />
-              <span>{label}</span>
+        ].map(({ key, label, icon: Icon, description }) => (
+          <div key={key} className="flex items-center justify-between p-4 bg-gray-700 rounded-lg">
+            <div className="flex items-center space-x-4">
+              <div className="p-2 bg-gray-600 rounded-lg">
+                <Icon className="w-5 h-5 text-blue-400" />
+              </div>
+              <div>
+                <h3 className="text-white font-medium">{label}</h3>
+                <p className="text-gray-400 text-sm">{description}</p>
+              </div>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input
@@ -377,20 +400,33 @@ const Setting = () => {
                 }
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+              <div className="w-11 h-6 bg-gray-600 rounded-full peer 
+                            peer-checked:bg-blue-500 
+                            after:content-[''] 
+                            after:absolute 
+                            after:top-[2px] 
+                            after:left-[2px] 
+                            after:bg-white 
+                            after:rounded-full 
+                            after:h-5 
+                            after:w-5 
+                            after:transition-all
+                            peer-checked:after:translate-x-full">
+              </div>
             </label>
           </div>
         ))}
-        <div className="flex space-x-4">
+    
+        <div className="flex space-x-4 mt-6">
           <button
             onClick={handleNotificationUpdate}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors duration-200"
           >
             Save Changes
           </button>
           <button
             onClick={() => setActiveSection("main")}
-            className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+            className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors duration-200"
           >
             Cancel
           </button>
