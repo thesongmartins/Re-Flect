@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FileEdit, Trash, Loader, Save, Plus } from "lucide-react";
+import { FileEdit, Trash, Loader, Save, Plus, X } from "lucide-react";
 import { Editor } from "primereact/editor";
 import axios from "axios";
 import useAuthStore from "../../store/authStore";
@@ -14,6 +14,7 @@ function Notes() {
   const [moodLog, setMoodLog] = useState([]);
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
   const [text, setText] = useState("");
   const { isDarkMode } = useThemeStore();
 
@@ -38,6 +39,13 @@ function Notes() {
     { type: "tired", emoji: "😴" },
   ];
 
+  // Extract first emoji from content
+  const extractFirstEmoji = (content) => {
+    const emojiRegex = /[\p{Emoji}]/u;
+    const match = content.match(emojiRegex);
+    return match ? match[0] : null;
+  };
+
   const getAuthorizedAxios = () => {
     const token = getAccessToken();
     return axios.create({
@@ -52,12 +60,7 @@ function Notes() {
       setLoading(true);
       const authorizedAxios = getAuthorizedAxios();
       const response = await authorizedAxios.get(API_URL);
-      console.log("Fetched Notes:", response.data);
       setNotes(response.data);
-
-      if (response.data.length === 0) {
-        console.warn("No notes found. Informing the user.");
-      }
     } catch (err) {
       console.error("Error during fetchNotes:", err);
       setError("Failed to load notes. Please try again later.");
@@ -70,13 +73,11 @@ function Notes() {
     try {
       setLoading(true);
       const token = getAccessToken();
-      console.log("Token sent:", token);
-
+      
       const requestBody = {
         title: newNote.title,
-        content: text,
+        content: text, // This will include HTML tags from the Editor
       };
-      console.log("Request Body:", requestBody);
 
       const authorizedAxios = axios.create({
         headers: {
@@ -96,12 +97,16 @@ function Notes() {
     }
   };
 
-  const handleDeleteNote = async (noteId) => {
+  const handleDeleteNote = async (e, noteId) => {
+    e.stopPropagation(); // Prevent note selection when deleting
     try {
       setLoading(true);
       const authorizedAxios = getAuthorizedAxios();
       await authorizedAxios.delete(`${API_URL}${noteId}`);
       deleteNote(noteId);
+      if (selectedNote?.id === noteId) {
+        setSelectedNote(null);
+      }
     } catch (err) {
       console.error(err);
       setError("Failed to delete note. Please try again.");
@@ -211,23 +216,52 @@ function Notes() {
               </div>
             ) : (
               notes.map((note) => (
-                <div key={note.id} className="p-4 rounded-lg shadow-md relative">
+                <div
+                  key={note.id}
+                  onClick={() => setSelectedNote(note)}
+                  className="mt-8 p-4 rounded-lg shadow-md relative bg-transparent cursor-pointer hover:shadow-lg transition-shadow"
+                >
                   <button
-                    onClick={() => handleDeleteNote(note.id)}
-                    className="absolute top-2 right-2 p-2 text-red-500"
+                    onClick={(e) => handleDeleteNote(e, note.id)}
+                    className="absolute top-2 right-2 p-2 text-red-500 hover:text-red-700"
                   >
                     <Trash className="w-4 h-4" />
                   </button>
-                  <h3 className="font-semibold mb-2">{note.title}</h3>
-                  <p className="text-sm text-gray-500">
-                    {note.content.substring(0, 100)}...
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold">{note.title}</h3>
+                    {extractFirstEmoji(note.content) && (
+                      <span className="text-xl">
+                        {extractFirstEmoji(note.content)}
+                      </span>
+                    )}
+                  </div>
                 </div>
               ))
             )}
           </div>
         )}
       </div>
+
+      {/* Note Detail Modal */}
+      {selectedNote && (
+        <div className=" inset-0 bg-transparent bg-opacity-50 flex items-center justify-center p-4">
+          <div className=" rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+            <div className="p-4 border-b flex justify-between items-center">
+              <h2 className="text-xl font-semibold">{selectedNote.title}</h2>
+              <button
+                onClick={() => setSelectedNote(null)}
+                className="p-2 hover:bg-gray-100 rounded-full"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div 
+              className="p-4 prose max-w-none"
+              dangerouslySetInnerHTML={{ __html: selectedNote.content }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Floating Action Button */}
       {!isNewNoteOpen && (
