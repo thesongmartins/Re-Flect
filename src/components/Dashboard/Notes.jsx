@@ -76,7 +76,7 @@ function Notes() {
       
       const requestBody = {
         title: newNote.title,
-        content: text, // This will include HTML tags from the Editor
+        content: text,
       };
 
       const authorizedAxios = axios.create({
@@ -97,45 +97,78 @@ function Notes() {
     }
   };
 
-  const handleEditNote = async () => {
-    try {
-      setLoading(true);
-      const token = getAccessToken();
-      
-      const requestBody = {
-        title: newNote.title,
-        content: text, // This will include HTML tags from the Editor
-      };
-
-      const authorizedAxios = axios.create({
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const response = await authorizedAxios.put(
-        `${API_URL}${selectedNote.id}`,
-        requestBody
-      );
-      updateNote(response.data); // Update the note in the state
-      setSelectedNote(null);
-      setIsNewNoteOpen(false);
-      setText("");
-      setNewNote({ title: "", content: "", mood: "" });
-    } catch (err) {
-      console.error(err);
-      setError("Failed to update note. Please try again.");
-    } finally {
-      setLoading(false);
+ // In the handleEditNote function
+ const handleEditNote = async () => {
+  try {
+    setLoading(true);
+    const token = getAccessToken();
+    
+    // Ensure the selected note has an ID
+    if (!selectedNote?.id) {
+      throw new Error('No note selected for editing');
     }
-  };
 
+    const requestBody = {
+      title: newNote.title, // The updated title from the input
+      content: text,        // The updated content from the editor
+    };
+
+    const authorizedAxios = axios.create({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Use the correct endpoint for updating the note
+    const response = await authorizedAxios.put(
+      `${API_URL}${selectedNote.id}/`, // The correct API URL with the note ID
+      requestBody
+    );
+
+    // Update the note in the store with the response data
+    updateNote(response.data);
+
+    // Reset the form and close the editor
+    setSelectedNote(null);
+    setIsNewNoteOpen(false);
+    setText("");
+    setNewNote({ title: "", content: "", mood: "" });
+  } catch (err) {
+    console.error(err);
+    setError("Failed to update note. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+// When selecting a note to edit (in the note card's edit button click handler)
+<button
+  onClick={(e) => {
+    e.stopPropagation();
+    const noteToEdit = useNoteStore.getState().getNote(note.id);
+    setSelectedNote(noteToEdit);
+    setNewNote({
+      title: noteToEdit.title,
+      content: noteToEdit.content,
+    });
+    setText(noteToEdit.content);
+    setIsNewNoteOpen(true);
+  }}
+  className="absolute top-2 right-8 p-2 text-blue-500 hover:text-blue-700"
+>
+  <Edit className="w-4 h-4" />
+</button>
   const handleDeleteNote = async (e, noteId) => {
     e.stopPropagation(); // Prevent note selection when deleting
     try {
       setLoading(true);
       const authorizedAxios = getAuthorizedAxios();
-      await authorizedAxios.delete(`${API_URL}${noteId}`);
+      // Make the DELETE request to the API
+      await authorizedAxios.delete(`${API_URL}${noteId}/`);
+      // Remove the note from the local store
       deleteNote(noteId);
+      // If the deleted note was the selected note, reset the selected note state
       if (selectedNote?.id === noteId) {
         setSelectedNote(null);
       }
@@ -146,6 +179,7 @@ function Notes() {
       setLoading(false);
     }
   };
+  
 
   const handleLogMood = (type) => {
     const newMood = {
