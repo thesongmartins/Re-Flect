@@ -476,7 +476,7 @@ const Setting = () => {
                   <ChevronLeft className="w-6 h-6" />
                 </button>
               )}
-              <h1 className="text-2xl font-semibold">
+              <h1 className={`text-2xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 {activeSection === "main"
                   ? "Settings"
                   : activeSection.charAt(0).toUpperCase() +
