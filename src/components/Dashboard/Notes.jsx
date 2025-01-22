@@ -288,32 +288,38 @@ function Notes() {
           </div>
         )}
       </div>
+     
 
       {selectedNote && (
-        <div className=" inset-0 bg-transparent bg-opacity-50 flex items-center justify-center p-4">
-          <div className=" rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
-            <div className="p-4 border-b flex justify-between items-center">
-              <h2 className="text-xl font-semibold">{selectedNote.title}</h2>
-              <button
-                onClick={() => setSelectedNote(null)}
-                className="p-2 hover:bg-gray-100 rounded-full"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-            <div 
-              className="p-4 prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: selectedNote.content }}
-            />
-          </div>
-        </div>
-      )}
+  <div className={` fixed md:relative inset-0 flex items-start justify-center rounded-3xl p-4 top-0 left-0 mr-2 ${
+    isDarkMode
+      ? "bg-gray-800 md:bg-transparent"
+      : "bg-gray-800 md:bg-transparent"
+  } shadow`}>
+    <div className="rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+      <div className="p-4 border-b flex justify-between items-center">
+        <h2 className="text-xl font-semibold">{selectedNote.title}</h2>
+        <button
+          onClick={() => setSelectedNote(null)}
+          className="p-2 hover:bg-gray-100 rounded-full"
+        >
+          <X className="w-6 h-6" />
+        </button>
+      </div>
+      <div 
+        className="p-4 prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: selectedNote.content }}
+      />
+    </div>
+  </div>
+)}
+
 
       {/* FAB */}
       {!isNewNoteOpen && (
         <button
           onClick={() => setIsNewNoteOpen(true)}
-          className="fixed bottom-8 right-8 w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center transition-transform hover:scale-110"
+          className={"fixed bottom-8 right-8 w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center transition-transform hover:scale-110"}
           aria-label="Add new note"
         >
           <Plus className="w-6 h-6" />
