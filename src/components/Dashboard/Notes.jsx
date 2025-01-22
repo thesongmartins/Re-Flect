@@ -2,17 +2,15 @@ import { useState, useEffect } from "react";
 import { FileEdit, Trash, Loader, Save, Plus } from "lucide-react";
 import { Editor } from "primereact/editor";
 import axios from "axios";
-import useAuthStore from "../../store/authStore"; // Assuming auth store is already set up
-import useNoteStore from "../../store/noteStore"; // Import the note store
+import useAuthStore from "../../store/authStore";
+import useNoteStore from "../../store/noteStore";
 import useThemeStore from "../../store/themeStore";
 import EmojiPicker from "emoji-picker-react";
 
 const API_URL = "https://re-flect.onrender.com/api/journal/entries/";
 
 function Notes() {
-  // const [searchQuery, setSearchQuery] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [moodLog, setMoodLog] = useState([]);
   const [newNote, setNewNote] = useState({ title: "", content: "", mood: "" });
   const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
@@ -28,8 +26,10 @@ function Notes() {
     setError,
     addNote,
     deleteNote,
-  } = useNoteStore(); // Destructure notes state
-  const { token } = useAuthStore(); // Assuming the token is stored in authStore
+  } = useNoteStore();
+  
+  // Get tokens from auth store
+  const { getAccessToken } = useAuthStore();
 
   const moodOptions = [
     { type: "happy", emoji: "😊" },
@@ -39,17 +39,24 @@ function Notes() {
     { type: "tired", emoji: "😴" },
   ];
 
+  // Create axios instance with authorization header
+  const getAuthorizedAxios = () => {
+    const token = getAccessToken();
+    return axios.create({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
   const fetchNotes = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(API_URL, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const authorizedAxios = getAuthorizedAxios();
+      const response = await authorizedAxios.get(API_URL);
       setNotes(response.data);
     } catch (err) {
-      console.error(err);
+      console.error("Error during fetchNotes:", err);
       setError("Failed to load notes. Please try again later.");
     } finally {
       setLoading(false);
@@ -59,20 +66,16 @@ function Notes() {
   const handleCreateNote = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(
-        API_URL,
-        {
-          ...newNote,
-          timestamp: new Date().toISOString(),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      addNote(response.data); // Add the newly created note to the store
+      const authorizedAxios = getAuthorizedAxios();
+      const response = await authorizedAxios.post(API_URL, {
+        ...newNote,
+        content: text, // Use the text from Editor component
+        timestamp: new Date().toISOString(),
+      });
+      addNote(response.data);
       setIsNewNoteOpen(false);
+      setText(""); // Clear the editor
+      setNewNote({ title: "", content: "", mood: "" }); // Reset new note state
     } catch (err) {
       console.error(err);
       setError("Failed to create note. Please try again.");
@@ -84,11 +87,8 @@ function Notes() {
   const handleDeleteNote = async (noteId) => {
     try {
       setLoading(true);
-      await axios.delete(`${API_URL}${noteId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const authorizedAxios = getAuthorizedAxios();
+      await authorizedAxios.delete(`${API_URL}${noteId}`);
       deleteNote(noteId);
     } catch (err) {
       console.error(err);
@@ -97,6 +97,7 @@ function Notes() {
       setLoading(false);
     }
   };
+
   const handleLogMood = (type) => {
     const newMood = {
       id: Date.now().toString(),
@@ -139,9 +140,8 @@ function Notes() {
           </div>
         </div>
 
-        {/* Render Notes */}
         {isNewNoteOpen ? (
-          <div className="p-4  lg:p-6 rounded-lg">
+          <div className="p-4 lg:p-6 rounded-lg">
             <input
               type="text"
               placeholder="Note Title"
@@ -165,7 +165,7 @@ function Notes() {
             )}
             <div
               onClick={() => setShowEmoji(!showEmoji)}
-              className="fixed cursor-pointer bottom-[80px]  md:bottom-[100px] md:right-[100px] bg-white rounded-full p-4 text-xl"
+              className="fixed cursor-pointer bottom-[80px] md:bottom-[100px] md:right-[100px] bg-white rounded-full p-4 text-xl"
             >
               😊
             </div>

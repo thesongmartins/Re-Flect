@@ -30,7 +30,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!email || !password) {
       setErrorMessage("Email and password are required.");
       return;
@@ -39,13 +39,10 @@ const Login = () => {
       setErrorMessage("Password must contain at least one uppercase letter.");
       return;
     }
-  
-    // Log the input data and what we're sending
-    console.log("Submitting login with:", { email, password });
-  
+
     start();
     setErrorMessage("");
-  
+
     try {
       const response = await fetch(
         "https://re-flect.onrender.com/api/users/login/",
@@ -57,27 +54,31 @@ const Login = () => {
           body: JSON.stringify({ email, password }),
         }
       );
-  
-      // Log the response status and body
+
       const responseData = await response.json();
-      console.log("Response status:", response.status);
-      console.log("Response data:", responseData);
-  
+
       if (response.ok) {
-        setAuthData(responseData.user, { access: responseData.access, refresh: responseData.refresh });
+        // Store both user data and tokens in a single call
+        const tokens = {
+          access: responseData.access,
+          refresh: responseData.refresh,
+        };
+        
+        // Ensure we're storing the complete user object and tokens
+        setAuthData(responseData.user, tokens);
+
         navigate("/dashboard");
       } else {
-        setErrorMessage(responseData.detail || "Failed to log in.");
+        const error =
+          responseData.detail || responseData.error || "Login failed. Please try again.";
+        setErrorMessage(error);
       }
     } catch (error) {
-      // Log any error encountered during the request
-      console.error("Error during login:", error);
       setErrorMessage("An error occurred. Please try again.");
     } finally {
       stop();
     }
   };
-  
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">

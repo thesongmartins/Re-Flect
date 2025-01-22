@@ -463,7 +463,7 @@ const Setting = () => {
                 <ChevronRight className="w-5 h-5 transition-transform group-open:rotate-90" />
               </summary>
               <p className={`mt-2 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
-                Navigate to Settings > Edit Profile. Here you can update your personal information, photo, and preferences.
+                Navigate to Settings Edit Profile. Here you can update your personal information, photo, and preferences.
               </p>
             </details>
           </div>
