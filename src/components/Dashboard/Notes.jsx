@@ -28,7 +28,6 @@ function Notes() {
     deleteNote,
   } = useNoteStore();
   
-  // Get tokens from auth store
   const { getAccessToken } = useAuthStore();
 
   const moodOptions = [
@@ -39,7 +38,6 @@ function Notes() {
     { type: "tired", emoji: "😴" },
   ];
 
-  // Create axios instance with authorization header
   const getAuthorizedAxios = () => {
     const token = getAccessToken();
     return axios.create({
@@ -54,7 +52,12 @@ function Notes() {
       setLoading(true);
       const authorizedAxios = getAuthorizedAxios();
       const response = await authorizedAxios.get(API_URL);
+      console.log("Fetched Notes:", response.data);
       setNotes(response.data);
+
+      if (response.data.length === 0) {
+        console.warn("No notes found. Informing the user.");
+      }
     } catch (err) {
       console.error("Error during fetchNotes:", err);
       setError("Failed to load notes. Please try again later.");
@@ -66,16 +69,25 @@ function Notes() {
   const handleCreateNote = async () => {
     try {
       setLoading(true);
-      const authorizedAxios = getAuthorizedAxios();
-      const response = await authorizedAxios.post(API_URL, {
-        ...newNote,
-        content: text, // Use the text from Editor component
-        timestamp: new Date().toISOString(),
+      const token = getAccessToken();
+      console.log("Token sent:", token);
+
+      const requestBody = {
+        title: newNote.title,
+        content: text,
+      };
+      console.log("Request Body:", requestBody);
+
+      const authorizedAxios = axios.create({
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+      const response = await authorizedAxios.post(API_URL, requestBody);
       addNote(response.data);
       setIsNewNoteOpen(false);
-      setText(""); // Clear the editor
-      setNewNote({ title: "", content: "", mood: "" }); // Reset new note state
+      setText("");
+      setNewNote({ title: "", content: "", mood: "" });
     } catch (err) {
       console.error(err);
       setError("Failed to create note. Please try again.");
@@ -112,7 +124,7 @@ function Notes() {
   }, []);
 
   return (
-    <div>
+    <div className="relative min-h-screen">
       <div className="flex-1 p-4 lg:p-6">
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -165,7 +177,7 @@ function Notes() {
             )}
             <div
               onClick={() => setShowEmoji(!showEmoji)}
-              className="fixed cursor-pointer bottom-[80px] md:bottom-[100px] md:right-[100px] bg-white rounded-full p-4 text-xl"
+              className="fixed cursor-pointer bottom-24 right-24 bg-white rounded-full p-4 text-xl shadow-lg"
             >
               😊
             </div>
@@ -190,37 +202,43 @@ function Notes() {
               </button>
             </div>
           </div>
-        ) : notes.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full">
-            <FileEdit className="w-24 h-24 text-gray-300 mb-4" />
-            <p>You do not have any notes.</p>
-            <button
-              onClick={() => setIsNewNoteOpen(true)}
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-blue-600"
-            >
-              <Plus className="w-5 h-5" />
-              <span>Start New Note</span>
-            </button>
-          </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {notes.map((note) => (
-              <div key={note.id} className="p-4 rounded-lg">
-                <button
-                  onClick={() => handleDeleteNote(note.id)}
-                  className="absolute top-2 right-2 p-2 text-red-500"
-                >
-                  <Trash className="w-4 h-4" />
-                </button>
-                <h3 className="font-semibold mb-2">{note.title}</h3>
-                <p className="text-sm text-gray-500">
-                  {note.content.substring(0, 100)}...
-                </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
+            {notes.length === 0 ? (
+              <div className="flex flex-col items-center justify-center col-span-full">
+                <FileEdit className="w-24 h-24 text-gray-300 mb-4" />
+                <p>You do not have any notes.</p>
               </div>
-            ))}
+            ) : (
+              notes.map((note) => (
+                <div key={note.id} className="p-4 rounded-lg shadow-md relative">
+                  <button
+                    onClick={() => handleDeleteNote(note.id)}
+                    className="absolute top-2 right-2 p-2 text-red-500"
+                  >
+                    <Trash className="w-4 h-4" />
+                  </button>
+                  <h3 className="font-semibold mb-2">{note.title}</h3>
+                  <p className="text-sm text-gray-500">
+                    {note.content.substring(0, 100)}...
+                  </p>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
+
+      {/* Floating Action Button */}
+      {!isNewNoteOpen && (
+        <button
+          onClick={() => setIsNewNoteOpen(true)}
+          className="fixed bottom-8 right-8 w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center transition-transform hover:scale-110"
+          aria-label="Add new note"
+        >
+          <Plus className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 }
