@@ -272,75 +272,79 @@ const Setting = () => {
         </div>
       </form>
     ),
-    
+
     appearance: (
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Font Size</h3>
-          <div className="space-y-4">
-            {["small", "default", "large"].map((size) => (
-              <label key={size} className="flex items-center">
-                <input
-                  type="radio"
-                  name="fontSize"
-                  value={size}
-                  checked={fontSize === size}
-                  onChange={(e) => setFontSize(e.target.value)}
-                  className="w-4 h-4 text-blue-500"
-                />
-                <span className="ml-2 capitalize">{size}</span>
-              </label>
+      <div className="space-y-6 p-4 ">
+        {/* Font Size Section */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3 text-black">Font Size</h3>
+          <div className="grid grid-cols-3 gap-3">
+            {['Small', 'Default', 'Large'].map((size) => (
+              <button
+                key={size}
+                onClick={() => setFontSize(size.toLowerCase())}
+                className={`p-2 rounded-lg transition-colors ${
+                  fontSize === size.toLowerCase()
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-200 hover:bg-gray-300 text-black'
+                }`}
+              >
+                {size}
+              </button>
             ))}
           </div>
         </div>
-
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Font Style</h3>
+    
+        {/* Font Style Section */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3 text-black">Font Style</h3>
           <select
             value={fontStyle}
             onChange={(e) => setFontStyle(e.target.value)}
-            className={`w-full p-3 rounded-lg ${
-              isDarkMode ? "bg-gray-800 text-white" : "bg-white"
-            }`}
+            className="w-full p-2 rounded-lg border border-gray-300 bg-white text-black"
           >
             <option value="Philosopher">Philosopher</option>
             <option value="Arial">Arial</option>
             <option value="Times New Roman">Times New Roman</option>
           </select>
         </div>
-
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Theme</h3>
-          <div className="grid grid-cols-2 gap-4">
+    
+        {/* Theme Section */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3 text-black">Theme</h3>
+          <div className="flex gap-4">
             <button
-              onClick={() => handleThemeChange("default")}
-              className={`p-4 border rounded-lg flex items-center justify-center ${
-                theme === "default"
-                  ? "border-blue-500"
-                  : isDarkMode
-                  ? "border-gray-700"
-                  : "border-gray-300"
+              onClick={() => handleThemeChange('light')}
+              className={`flex-1 p-3 rounded-lg border transition-colors ${
+                !isDarkMode
+                  ? 'bg-blue-500 text-white border-blue-600'
+                  : 'bg-white text-black border-gray-300'
               }`}
             >
-              Default
+              Light
             </button>
             <button
-              onClick={() => handleThemeChange("dark")}
-              className={`p-4 border rounded-lg flex items-center justify-center ${
-                theme === "dark" ? "border-blue-500" : "border-gray-700"
-              } bg-gray-900 text-white`}
+              onClick={() => handleThemeChange('dark')}
+              className={`flex-1 p-3 rounded-lg border transition-colors ${
+                isDarkMode
+                  ? 'bg-blue-500 text-white border-blue-600'
+                  : 'bg-gray-800 text-white border-gray-700'
+              }`}
             >
               Dark
             </button>
           </div>
         </div>
-
-        <button
-          onClick={() => setActiveSection("main")}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-        >
-          Save Changes
-        </button>
+    
+        {/* Save Button */}
+        <div className="flex justify-end pt-4">
+          <button
+            onClick={() => setActiveSection('main')}
+            className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Save Changes
+          </button>
+        </div>
       </div>
     ),
 
