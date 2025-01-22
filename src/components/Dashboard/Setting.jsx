@@ -43,7 +43,8 @@ const Setting = () => {
     name: "",
     email: "",
     phone: "",
-    password: "",
+    bio: "",
+    avatar: null,
     privacy: "public",
   });
 
@@ -52,6 +53,9 @@ const Setting = () => {
   const [fontStyle, setFontStyle] = useState("Philosopher");
   const [theme, setTheme] = useState("default");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   // Notification state
   const [notifications, setNotifications] = useState({
@@ -77,10 +81,38 @@ const Setting = () => {
     if (savedNotifications) setNotifications(JSON.parse(savedNotifications));
   }, []);
 
-  const handleProfileUpdate = (e) => {
+  const handleProfileUpdate = async (e) => {
     e.preventDefault();
-    localStorage.setItem("profile", JSON.stringify(profile));
-    setActiveSection("main");
+    setIsLoading(true);
+    setError("");
+    setSuccess(false);
+  
+    try {
+      // Validate required fields
+      if (!profile.name || !profile.email) {
+        throw new Error("Name and email are required");
+      }
+  
+      // Validate email format
+      if (!/\S+@\S+\.\S+/.test(profile.email)) {
+        throw new Error("Please enter a valid email address");
+      }
+  
+      // Save to localStorage
+      localStorage.setItem("profile", JSON.stringify(profile));
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setSuccess(true);
+      setTimeout(() => {
+        setActiveSection("main");
+      }, 1500);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleNotificationUpdate = () => {
@@ -120,74 +152,127 @@ const Setting = () => {
     ),
 
     profile: (
-      <form onSubmit={handleProfileUpdate} className="space-y-6">
+      <form onSubmit={handleProfileUpdate} className="space-y-6 text-white">
+        {/* Avatar Upload */}
+        <div className="flex items-center space-x-4 mb-6">
+          <div className="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center">
+            {profile.avatar ? (
+              <img 
+                src={profile.avatar} 
+                alt="Profile" 
+                className="w-full h-full rounded-full object-cover"
+              />
+            ) : (
+              <User className="w-12 h-12 text-gray-400" />
+            )}
+          </div>
+          <label className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+            Upload Photo
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    setProfile({ ...profile, avatar: reader.result });
+                  };
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+          </label>
+        </div>
+    
+        {/* Form Fields */}
         <div>
-          <label className="block mb-2">Name</label>
+          <label className="block text-white mb-2">Full Name</label>
           <input
             type="text"
             value={profile.name}
             onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-            className={`w-full p-3 rounded-lg ${
-              isDarkMode ? "bg-gray-800 text-white" : "bg-white"
-            }`}
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            placeholder="Enter your full name"
           />
         </div>
+    
         <div>
-          <label className="block mb-2">Email</label>
+          <label className="block text-white mb-2">Email Address</label>
           <input
             type="email"
             value={profile.email}
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-            className={`w-full p-3 rounded-lg ${
-              isDarkMode ? "bg-gray-800 text-white" : "bg-white"
-            }`}
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            placeholder="Enter your email"
           />
         </div>
+    
         <div>
-          <label className="block mb-2">Phone</label>
+          <label className="block text-white mb-2">Phone Number</label>
           <input
             type="tel"
             value={profile.phone}
             onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-            className={`w-full p-3 rounded-lg ${
-              isDarkMode ? "bg-gray-800 text-white" : "bg-white"
-            }`}
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            placeholder="Enter your phone number"
           />
         </div>
+    
         <div>
-          <label className="block mb-2">Privacy</label>
+          <label className="block text-white mb-2">Bio</label>
+          <textarea
+            value={profile.bio}
+            onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+            placeholder="Write a short bio about yourself"
+            rows="3"
+          />
+        </div>
+    
+        <div>
+          <label className="block text-white mb-2">Profile Privacy</label>
           <select
             value={profile.privacy}
-            onChange={(e) =>
-              setProfile({ ...profile, privacy: e.target.value })
-            }
-            className={`w-full p-3 rounded-lg ${
-              isDarkMode ? "bg-gray-800 text-white" : "bg-white"
-            }`}
+            onChange={(e) => setProfile({ ...profile, privacy: e.target.value })}
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
           >
             <option value="public">Public</option>
             <option value="private">Private</option>
             <option value="friends">Friends Only</option>
           </select>
         </div>
+    
+        {/* Success Message */}
+        {success && (
+          <div className="text-green-400 text-sm">Profile updated successfully!</div>
+        )}
+    
+        {/* Error Message */}
+        {error && (
+          <div className="text-red-400 text-sm">{error}</div>
+        )}
+    
+        {/* Buttons */}
         <div className="flex space-x-4">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
-            Save Changes
+            {isLoading ? "Saving..." : "Save Changes"}
           </button>
           <button
             type="button"
             onClick={() => setActiveSection("main")}
-            className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+            className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
           >
             Cancel
           </button>
         </div>
       </form>
     ),
-
+    
     appearance: (
       <div className="space-y-8">
         <div>
