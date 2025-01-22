@@ -294,7 +294,7 @@ function Notes() {
   <div className={` fixed md:relative inset-0 flex items-start justify-center rounded-3xl p-4 top-0 left-0 mr-2 ${
     isDarkMode
       ? "bg-gray-800 md:bg-transparent"
-      : "bg-gray-800 md:bg-transparent"
+      : "bg-gray-50 md:bg-transparent"
   } shadow`}>
     <div className="rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
       <div className="p-4 border-b flex justify-between items-center">
