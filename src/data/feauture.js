@@ -1,30 +1,31 @@
-import heroImg from "../assets/hero-img.svg";
+import graph from "../assets/graph.jpg";
+import mood from "../assets/mood.jpg";
+import voice from "../assets/voice.jpg";
+import upload from "../assets/upload.svg";
 
-export const features = [{
+export const features = [
+  {
     id: 1,
     title: "Voice Journaling",
     description: "Share your heart without lifting a finger",
-    img: heroImg
-
-},
-{
+    img: voice,
+  },
+  {
     id: 2,
     title: "Media Upload",
     description: "Paint a vivid picture of your experience",
-    img: heroImg
-
-},
-{
+    img: upload,
+  },
+  {
     id: 3,
     title: "Mood Tracker",
     description: "Understand your emotional pattern and find balance",
-    img: heroImg
-
-},
-{
+    img: mood,
+  },
+  {
     id: 4,
     title: "Timeline View",
     description: "Witness your growth and transformation",
-    img: heroImg
-
-}]
+    img: graph,
+  },
+];
