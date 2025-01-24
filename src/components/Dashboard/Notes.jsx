@@ -228,7 +228,7 @@ function Notes() {
             <input
               type="text"
               placeholder="Note Title"
-              className="w-full border mb-4 p-2 rounded"
+              className="w-full border mb-4 p-2 rounded bg-transparent border-gray-500"
               value={newNote.title}
               onChange={(e) =>
                 setNewNote((prev) => ({ ...prev, title: e.target.value }))
