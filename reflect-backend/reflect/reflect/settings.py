@@ -143,6 +143,30 @@ DATABASES = {
     }
 }
 
+########################################### modified to load variables fron .env file
+import environ
+
+# Initialize environ
+env = environ.Env()
+environ.Env.read_env()  # Read the .env file
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT', default='5432'),
+    }
+}
+
+SECRET_KEY = env('SECRET_KEY')
+
+# Debug mode
+DEBUG = env.bool('DEBUG', default=False)
+##############################################################
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
