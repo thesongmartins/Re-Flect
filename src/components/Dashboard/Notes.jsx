@@ -174,7 +174,7 @@ function Notes() {
       }
     } catch (err) {
       console.error(err);
-      setError("Failed to delete note. Please try again.");
+      setError("Failed to delete journal. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -227,7 +227,7 @@ function Notes() {
           <div className="p-4 lg:p-6 rounded-lg">
             <input
               type="text"
-              placeholder="Note Title"
+              placeholder="Journal Title"
               className="w-full border mb-4 p-2 rounded bg-transparent border-gray-500"
               value={newNote.title}
               onChange={(e) =>
@@ -278,7 +278,7 @@ function Notes() {
             {notes.length === 0 ? (
               <div className="flex flex-col items-center justify-center col-span-full">
                 <FileEdit className="w-24 h-24 text-gray-300 mb-4" />
-                <p>You do not have any notes.</p>
+                <p>You do not have any journal.</p>
               </div>
             ) : (
               notes.map((note) => (
