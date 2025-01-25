@@ -132,24 +132,33 @@ SIMPLE_JWT = {
 #   }
 #}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'reflect_db',
-        'USER': 'reflect_user',
-        'PASSWORD': 'Candy4Precious',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+#DATABASES = {
+#   'default': {
+#       'ENGINE': 'django.db.backends.postgresql',
+#       'NAME': 'reflect_db',
+#       'USER': 'reflect_db_user',
+ #       'PASSWORD': 'Candy4Precious',
+  #      'HOST': 'localhost',
+   #     'PORT': '5432',
+#    }
+#}
 
 ########################################### modified to load variables fron .env file
+import os
 import environ
+from pathlib import Path
 
 # Initialize environ
 env = environ.Env()
-environ.Env.read_env()  # Read the .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
+print("DB_NAME:", env('DB_NAME', default='NOT SET'))
+print("DB_USER:", env('DB_USER', default='NOT SET'))
+
+# Define BASE_DIR as a Path object
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Set up the database configuration using values from the .env file
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -161,6 +170,7 @@ DATABASES = {
     }
 }
 
+# Secret key configuration
 SECRET_KEY = env('SECRET_KEY')
 
 # Debug mode
