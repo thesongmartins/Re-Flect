@@ -145,38 +145,17 @@ SIMPLE_JWT = {
 
 ########################################### modified to load variables fron .env file
 import os
-import environ
 import dj_database_url
 from pathlib import Path
 
-# Initialize environ
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
-# Define BASE_DIR as a Path object
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Database configuration with fallback to DATABASE_URL
 DATABASES = {
-    'default': dj_database_url.config(
-        default=env('DATABASE_URL', default=''),
-        conn_max_age=600,
-        ssl_require=True
-    ) or {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME', default=''),
-        'USER': env('DB_USER', default=''),
-        'PASSWORD': env('DB_PASSWORD', default=''),
-        'HOST': env('DB_HOST', default='localhost'),
-        'PORT': env('DB_PORT', default='5432'),
-    }
+    'default': dj_database_url.parse(os.getenv('DATABASE_URL', ''))
 }
 
-# Secret key configuration
-SECRET_KEY = env('SECRET_KEY')
-
-# Debug mode
-DEBUG = env.bool('DEBUG', default=False)
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ##############################################################
 
 MEDIA_URL = '/media/'
