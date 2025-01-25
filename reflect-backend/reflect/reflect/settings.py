@@ -146,26 +146,28 @@ SIMPLE_JWT = {
 ########################################### modified to load variables fron .env file
 import os
 import environ
+import dj_database_url
 from pathlib import Path
 
 # Initialize environ
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-print("DB_NAME:", env('DB_NAME', default='NOT SET'))
-print("DB_USER:", env('DB_USER', default='NOT SET'))
-
 # Define BASE_DIR as a Path object
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Set up the database configuration using values from the .env file
+# Database configuration with fallback to DATABASE_URL
 DATABASES = {
-    'default': {
+    'default': dj_database_url.config(
+        default=env('DATABASE_URL', default=''),
+        conn_max_age=600,
+        ssl_require=True
+    ) or {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
+        'NAME': env('DB_NAME', default=''),
+        'USER': env('DB_USER', default=''),
+        'PASSWORD': env('DB_PASSWORD', default=''),
+        'HOST': env('DB_HOST', default='localhost'),
         'PORT': env('DB_PORT', default='5432'),
     }
 }
