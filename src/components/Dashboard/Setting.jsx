@@ -448,8 +448,15 @@ const Setting = () => {
     ),
 
     notification: (
-      <div className="space-y-6 p-4 rounded-lg bg-white dark:bg-gray-800">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+      <div
+        className={`space-y-6 p-4 rounded-lg ${
+          isDarkMode ? "bg-gray-800" : "bg-white"
+        }`}
+      >
+        <h2
+          className={`text-xl font-semibold mb-6 
+          ${isDarkMode ? " text-white" : "text-gray-800"}`}
+        >
           Notification Preferences
         </h2>
 
@@ -481,15 +488,35 @@ const Setting = () => {
         ].map(({ key, label, icon: Icon, description }) => (
           <div
             key={key}
-            className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
+            className={`flex items-center justify-between p-4  rounded-lg ${
+              isDarkMode ? "bg-gray-700" : "bg-gray-50"
+            }`}
           >
             <div className="flex items-center space-x-4">
-              <div className="p-2 bg-gray-100 dark:bg-gray-600 rounded-lg">
-                <Icon className="w-5 h-5 text-blue-500 dark:text-blue-400" />
+              <div
+                className={`p-2rounded-lg ${
+                  isDarkMode ? "bg-gray-600" : "bg-gray-100"
+                }`}
+              >
+                <Icon
+                  className={`w-5 h-5 ${
+                    isDarkMode ? "text-blue-400" : "text-blue-500"
+                  }`}
+                />
               </div>
               <div>
-                <h3 className="text-gray-900 dark:text-gray-200">{label}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                <h3
+                  className={` ${
+                    isDarkMode ? "text-gray-200" : "text-gray-900"
+                  }`}
+                >
+                  {label}
+                </h3>
+                <p
+                  className={`text-sm ${
+                    isDarkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
                   {description}
                 </p>
               </div>

@@ -29,7 +29,7 @@ function Notes() {
     deleteNote,
     updateNote, // New method to update notes
   } = useNoteStore();
-  
+
   const { getAccessToken } = useAuthStore();
 
   const moodOptions = [
@@ -73,7 +73,7 @@ function Notes() {
     try {
       setLoading(true);
       const token = getAccessToken();
-      
+
       const requestBody = {
         title: newNote.title,
         content: text,
@@ -97,68 +97,67 @@ function Notes() {
     }
   };
 
- // In the handleEditNote function
- const handleEditNote = async () => {
-  try {
-    setLoading(true);
-    const token = getAccessToken();
-    
-    // Ensure the selected note has an ID
-    if (!selectedNote?.id) {
-      throw new Error('No note selected for editing');
+  // In the handleEditNote function
+  const handleEditNote = async () => {
+    try {
+      setLoading(true);
+      const token = getAccessToken();
+
+      // Ensure the selected note has an ID
+      if (!selectedNote?.id) {
+        throw new Error("No note selected for editing");
+      }
+
+      const requestBody = {
+        title: newNote.title, // The updated title from the input
+        content: text, // The updated content from the editor
+      };
+
+      const authorizedAxios = axios.create({
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Use the correct endpoint for updating the note
+      const response = await authorizedAxios.put(
+        `${API_URL}${selectedNote.id}/`, // The correct API URL with the note ID
+        requestBody
+      );
+
+      // Update the note in the store with the response data
+      updateNote(response.data);
+
+      // Reset the form and close the editor
+      setSelectedNote(null);
+      setIsNewNoteOpen(false);
+      setText("");
+      setNewNote({ title: "", content: "", mood: "" });
+    } catch (err) {
+      console.error(err);
+      setError("Failed to update note. Please try again.");
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const requestBody = {
-      title: newNote.title, // The updated title from the input
-      content: text,        // The updated content from the editor
-    };
-
-    const authorizedAxios = axios.create({
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    // Use the correct endpoint for updating the note
-    const response = await authorizedAxios.put(
-      `${API_URL}${selectedNote.id}/`, // The correct API URL with the note ID
-      requestBody
-    );
-
-    // Update the note in the store with the response data
-    updateNote(response.data);
-
-    // Reset the form and close the editor
-    setSelectedNote(null);
-    setIsNewNoteOpen(false);
-    setText("");
-    setNewNote({ title: "", content: "", mood: "" });
-  } catch (err) {
-    console.error(err);
-    setError("Failed to update note. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
-
-
-// When selecting a note to edit (in the note card's edit button click handler)
-<button
-  onClick={(e) => {
-    e.stopPropagation();
-    const noteToEdit = useNoteStore.getState().getNote(note.id);
-    setSelectedNote(noteToEdit);
-    setNewNote({
-      title: noteToEdit.title,
-      content: noteToEdit.content,
-    });
-    setText(noteToEdit.content);
-    setIsNewNoteOpen(true);
-  }}
-  className="absolute top-2 right-8 p-2 text-blue-500 hover:text-blue-700"
->
-  <Edit className="w-4 h-4" />
-</button>
+  // When selecting a note to edit (in the note card's edit button click handler)
+  <button
+    onClick={(e) => {
+      e.stopPropagation();
+      const noteToEdit = useNoteStore.getState().getNote(note.id);
+      setSelectedNote(noteToEdit);
+      setNewNote({
+        title: noteToEdit.title,
+        content: noteToEdit.content,
+      });
+      setText(noteToEdit.content);
+      setIsNewNoteOpen(true);
+    }}
+    className="absolute top-2 right-8 p-2 text-blue-500 hover:text-blue-700"
+  >
+    <Edit className="w-4 h-4" />
+  </button>;
   const handleDeleteNote = async (e, noteId) => {
     e.stopPropagation(); // Prevent note selection when deleting
     try {
@@ -179,7 +178,6 @@ function Notes() {
       setLoading(false);
     }
   };
-  
 
   const handleLogMood = (type) => {
     const newMood = {
@@ -246,11 +244,11 @@ function Notes() {
                 <EmojiPicker />
               </div>
             )}
-            <div
+            {/* <div
               onClick={() => setShowEmoji(!showEmoji)}
               className="fixed cursor-pointer bottom-24 right-24 bg-white rounded-full p-4 text-xl shadow-lg"
             >
-            </div>
+            </div> */}
             <div className="flex justify-end space-x-2 pt-4">
               <button
                 onClick={() => setIsNewNoteOpen(false)}
@@ -321,38 +319,40 @@ function Notes() {
           </div>
         )}
       </div>
-     
 
       {selectedNote && (
-  <div className={` fixed md:relative inset-0 flex items-start justify-center rounded-3xl p-4 top-0 left-0 mr-2 ${
-    isDarkMode
-      ? "bg-gray-800 md:bg-transparent"
-      : "bg-gray-50 md:bg-transparent"
-  } shadow`}>
-    <div className="rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
-      <div className="p-4 border-b flex justify-between items-center">
-        <h2 className="text-xl font-semibold">{selectedNote.title}</h2>
-        <button
-          onClick={() => setSelectedNote(null)}
-          className="p-2 hover:bg-gray-100 rounded-full"
+        <div
+          className={` fixed md:relative inset-0 flex items-start justify-center rounded-3xl p-4 top-0 left-0 mr-2 ${
+            isDarkMode
+              ? "bg-gray-800 md:bg-transparent"
+              : "bg-gray-50 md:bg-transparent"
+          } shadow`}
         >
-          <X className="w-6 h-6" />
-        </button>
-      </div>
-      <div 
-        className="p-4 prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: selectedNote.content }}
-      />
-    </div>
-  </div>
-)}
-
+          <div className="rounded-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+            <div className="p-4 border-b flex justify-between items-center">
+              <h2 className="text-xl font-semibold">{selectedNote.title}</h2>
+              <button
+                onClick={() => setSelectedNote(null)}
+                className="p-2 hover:bg-gray-100 rounded-full"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div
+              className="p-4 prose max-w-none"
+              dangerouslySetInnerHTML={{ __html: selectedNote.content }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* FAB */}
       {!isNewNoteOpen && (
         <button
           onClick={() => setIsNewNoteOpen(true)}
-          className={"fixed bottom-8 right-8 w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center transition-transform hover:scale-110"}
+          className={
+            "fixed bottom-8 right-8 w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center transition-transform hover:scale-110"
+          }
           aria-label="Add new note"
         >
           <Plus className="w-6 h-6" />
