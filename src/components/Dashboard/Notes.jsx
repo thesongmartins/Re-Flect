@@ -213,8 +213,8 @@ function Notes() {
                 onClick={() => handleLogMood(mood.type)}
                 className={`p-4 rounded-lg text-2xl hover:scale-110 ${
                   isDarkMode
-                    ? "bg-white hover:bg-gray-700"
-                    : "bg-gray-800 hover:bg-gray-700"
+                    ? "bg-gray-800 hover:bg-gray-700"
+                    : "bg-white hover:bg-gray-50"
                 } shadow`}
               >
                 {mood.emoji}
@@ -250,7 +250,6 @@ function Notes() {
               onClick={() => setShowEmoji(!showEmoji)}
               className="fixed cursor-pointer bottom-24 right-24 bg-white rounded-full p-4 text-xl shadow-lg"
             >
-              😊
             </div>
             <div className="flex justify-end space-x-2 pt-4">
               <button
