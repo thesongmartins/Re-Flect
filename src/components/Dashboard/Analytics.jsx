@@ -18,13 +18,13 @@ const moodData = [
 
 function Analytics() {
   return (
-    <div className="flex-1 p-4 lg:p-6">
-      <h2 className="text-xl font-semibold mb-6">Analytics</h2>
-      <div className="w-full h-96">
+    <div className="flex-1 p-2 lg:p-6">
+      <h2 className="text-xl font-semibold">Analytics</h2>
+      <div className="w-full h-[520px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={moodData}
-            margin={{ top: 100, right: 0, left: 0, bottom: 100 }}
+            margin={{ top: 50, right: 0, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="type" />
